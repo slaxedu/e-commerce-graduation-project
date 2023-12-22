@@ -1,0 +1,67 @@
+{% extends "base.html" %}
+
+
+
+
+
+{% comment %} 
+{%block content%}
+
+<h1>Login</h1>
+<form action="." method="post" novalidate>
+  {% csrf_token %}
+  {{ form.as_p }}
+  <button type="submit" id="submit">Login</button>
+</form>
+
+{%endblock%} {% endcomment %}
+
+
+
+
+
+
+
+{%block title%}Login{%endblock%}
+
+{%load static%}
+{% block css1%}
+<link rel="stylesheet" href="{% static 'css/bootstrap-5.3.2-dist/css/bootstrap.css'%}">
+<link rel="stylesheet" href="{% static 'css/bootstrap-5.3.2-dist/css/bootstrap.min.css'%}">
+<link rel="stylesheet" href="{%static 'css/register.css'%}">
+    
+{%endblock%} 
+{%block content%}
+{% include "view_product/nav.html" %}
+
+
+
+
+<div class="content-register">
+    <h1 style='width: fit-content;
+    margin: 160px auto 10px;'>Login</h1>
+    <form action="." method="post" novalidate>
+        {% csrf_token %}
+        <div class="mb-3">
+          <label for="username" class="form-label">Email or Phone</label>
+          {{form.username}}
+      </div>
+          <div class="mb-3">
+              <label for="Password" class="form-label">Password</label>
+              {{form.password}}
+          </div>
+
+      {% if form.errors or form.non_field_errors%}
+
+      <div class='mb-3 p-6 bg-red-100 rounded-xl' style='color:red'>
+          {%for field in form%}
+              {{field.errors}}
+          {%endfor%}
+              {{form.non_field_errors}}
+      </div>
+
+      {%endif%}
+        <button type="submit" class="btn btn-primary">Submit</button>
+    </form>
+</div>
+{%endblock%}

@@ -1,0 +1,261 @@
+/* Start global attribute*/
+* {
+    box-sizing: border-box;
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+html {
+    scroll-behavior: smooth;
+}
+body {
+    font-family: 'Cairo', sans-serif;
+    font-family: 'Roboto', sans-serif;
+    background-color: #f2f2f2;
+}
+ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+.container {
+    padding-left: 15px;
+    padding-right: 15px;
+    margin-left: auto;
+    margin-right: auto;
+}
+/* Small */
+@media (min-width: 768px) {
+    .container {
+        width: 750px;
+    }
+}
+/* Medium */
+@media (min-width: 992px) {
+    .container {
+        width: 970px;
+    }
+}
+/* Large */
+@media (min-width: 1200px) {
+    .container {
+        width: 1170px;
+    }
+}
+/* End global attribute */
+/*Start Navbar*/
+.nav {
+    position: relative;
+}
+.nav .content-nav {
+    background-color: black;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    height: 80px;
+    width: 100%;
+    padding: 5px;
+    position: fixed;
+    top: 0;
+    z-index: 20;
+}
+.nav .content-nav .sec-one {
+    margin-left: 10px;
+    display: flex;
+    align-items: center;
+}
+.nav .content-nav .sec-one img {
+    width: 80px;
+    height: 80px;
+}
+.nav .content-nav .sec-one .center {
+    margin: auto;
+    display: flex;
+    align-items: center;
+}
+.nav .content-nav .sec-one .center form input {
+    width: 550px;
+    height: 40px;
+    border-radius: 10px;
+    border: 2px solid white;
+    padding-left: 10px;
+    font-size: 16px;
+}
+.nav .content-nav .sec-one .center form input:focus{
+    outline: none;
+}
+.nav .content-nav .sec-one .center .register i{
+    color: white;
+    margin-left: 20px;
+}
+.nav .content-nav .sec-one .center .register {
+    color: white;
+    text-decoration: none;
+    cursor: pointer;
+}
+.nav .content-nav .sec-one .locations {
+    color: white;
+    text-decoration: none;
+    width: fit-content;
+    text-align: center;
+    padding: 10px 20px;
+}
+.nav .content-nav .sec-one .locations:hover{
+    background-color: white;
+    color: black;
+}
+.nav .content-nav .sec-one .center .register a{
+    padding: 10px 20px;
+}
+.nav .content-nav .sec-one .center .register:hover a{
+    background-color: white;
+    color: black;
+}
+.nav .content-nav .sec-one .center form div {
+    position: relative;
+}
+.nav .content-nav .sec-one .center form .search {
+    position: absolute;
+    right: 20px;
+    top: 12px;
+    color: black;
+}
+.nav .content-nav .sec-two {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-right: 40px;
+}
+.nav .content-nav .sec-two .sanme-style {
+    width: fit-content;
+    height: 40px;
+    padding: 10px 20px;
+    text-align: center;
+}
+.nav .content-nav .sec-two .sanme-style a{
+    text-decoration: none;
+    color: white;
+}
+.nav .content-nav .sec-two .sanme-style:hover{
+    background-color: white;
+    color: black;
+}
+.nav .content-nav .sec-two .sanme-style:hover a{
+    color: black;
+}
+.nav .content-nav .sec-two .cart a img {
+    width: 40px;
+    height: 40px;
+    background-color: white;
+    margin-left: 10px;
+    border-radius: 5px;
+}
+.nav .content-nav .sec-two .cart a img:hover{
+    background-color: yellow;
+}
+/*End Navbar*/
+/* Start viewData */
+.portfolio .filter{
+    padding: 20px 40px;
+    height: 60px;
+    width: 100%;
+    background-color: white;
+    position: fixed;
+    top: 80px;
+    z-index: 20;
+}
+.portfolio .filter ul{
+    display: flex;
+    justify-content: end;
+    height: 20px;
+    align-items: center;
+}
+.portfolio .filter ul a{
+    text-decoration: none;
+    color: black;
+}
+.portfolio .filter ul a:hover{
+    color: red;
+}
+.portfolio .filter ul a li{
+    height: 40px;
+    padding: 10px 20px;
+}
+.portfolio .content .left-side .filter ul a li{
+    margin-left: 20px;
+}
+.portfolio .content {
+    display: flex;
+    width: 100%;
+    position: relative;
+}
+.portfolio .content .sidebar {
+    position: fixed;
+    left: 30px;
+    width: 290px;
+    height: 568px;
+    background-color: white;
+    border-radius: 10px;
+    padding: 30px;
+    margin-top: 160px;
+}
+.portfolio .content .sidebar .content-sidebar p{
+    margin-bottom: 30px;
+    text-transform: uppercase;
+    font-weight: bold;
+    font-size: 16px;
+}
+.portfolio .content .sidebar .content-sidebar ul a{
+    text-decoration: none;
+    color: black;
+    font-size: 14px;
+    cursor: pointer;
+}
+.portfolio .content .sidebar .content-sidebar ul a:hover{
+    color: red;
+}
+.portfolio .content .sidebar .content-sidebar ul a li{
+    margin-bottom: 15px;
+}
+
+.portfolio .content .right-side .portfolio-content {
+    display: grid;
+    grid-template-columns: repeat(auto-fill , minmax(265px , 1fr));
+    gap: 10px;
+    width: 1200px;
+    position: absolute;
+    right: 10px;
+    margin-top: 160px;
+}
+.portfolio .content .right-side .portfolio-content .port {
+    background-color: white;
+    border-radius: 10px;
+    margin: 0 0 20px 20px;
+    text-align: center;
+}
+.portfolio .content .right-side .portfolio-content .port img {
+    width: 200px;
+    height: 200px;
+    margin: 30px;
+    border-radius: 7px;
+}
+.portfolio .content .right-side .portfolio-content .port .text {
+    padding: 20px;
+    text-align: left;
+}
+.portfolio .content .right-side .portfolio-content .port .text h3{
+    margin-bottom: 10px;
+}
+.portfolio .content .right-side .portfolio-content .port .text p{
+    margin-bottom: 3px;
+}
+.portfolio .right-side .portfolio-content .text .description {
+    margin: 0;
+}
+.portfolio .right-side .portfolio-content .text .price {
+    color: red; 
+    line-height: 1.6;
+    margin-bottom: 0;
+}
+/* ُEnd viewData */

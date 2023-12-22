@@ -1,0 +1,428 @@
+{% extends "base.html" %}
+{%load static%}
+
+{%block title%} Cart {%endblock%}
+
+
+{% block css1%}
+<link rel="stylesheet" href="{%static 'css/addToCard.css'%}">
+<link rel="stylesheet" href="{%static 'node_modules/sweetalert2/dist/sweetalert2.min.css'%}">
+
+{%endblock%} 
+
+
+{%block content%}
+
+{%include 'view_product/nav.html'%}
+
+
+<div class="main-container" style="margin-top:100px;">
+    <div class="big-container">
+        {% for item in items_cart%}
+        <div class="card-content" id="card-container">
+            <div class="card">
+                <img src="{{item.product.image.url}}" alt="Product Image" width="200">
+                <div class="text">
+
+                    <p class="product-name">
+                        <a style="padding: 0px;color: black;background: white;" href="{% url 'product_items'  item.product.slug  %}">
+                            {{item.product|truncatechars:35}}     
+                        </a>
+                    </p>
+                    <p class="product-price">{{item.product.price}} EGP</p>
+                </div>
+                <form action= "." method='get'>
+                    <div class="quantity-container">
+                        <button class="minus-btn" >-</button>
+                        <input type="hidden" name="product" value="{{item.product.slug}}" />
+                        <input type="text" name='quantity' class="quantity-input" value="{{item.quantity}}" readonly>
+                        <button class="plus-btn">+</a></button>
+                    </div>
+                </form>
+                <button class="remove-btn" style="width: 100px;padding: 0px;margin: 0px auto 20px">
+                    <a href="{% url 'cart_detele'  item.product.slug  %}"  style="padding: 0px;color:white;background: red;">
+                        Remove
+                    </a>
+                </button>
+            </div>
+            
+        </div>
+        {%endfor%}
+        
+        
+    </div>
+    <div class="checkout">
+        <h4>order details</h4>
+        <div>
+            <div class="first-text">
+                <p>Product Selected:</p>
+                <span>{{number_product}}</span>
+            </div>
+            <div class="sceond-text">
+                <p>Total Price:</p>
+                <span>{{total}} EGP</span>
+            </div>
+            {%if total%}
+            <div class="sceond-text">
+                <p>It Will Arrive:</p>
+                <span>{{date}}</span>
+            </div>
+            {%endif%}
+        </div>
+        <div class="locations">
+            <a href="" id="currentLocation" class="current-location">Current location</a>
+            <p id="toggleForm" class="other-location">other location</p>
+        </div>
+        <form method="post" id="formLocation" onsubmit="showAlert()">
+            {% csrf_token %}
+            <input type="hidden" name="location" id="locationInput" value="" required>
+            <input type="text" name="phone" placeholder="Mobile Number" required class="inp">
+            <select id="select" required name="governorate" class="inp">
+                <option value="" selected disabled hidden>Select a governorate</option>
+                <option value="cairo">Cairo</option>
+                <option value="giza">Giza</option>
+                <option value="elsharqiah">EL Sharqiah</option>
+                <option value="alexandria">Alexandria</option>
+                <option value="Souhaj">Souhaj</option>
+                <option value="6th october">6th october</option>
+                <option value="Qenah">Qenah</option>
+                <option value="Menyah">Menyah</option>
+                <option value="Asswan">Asswan</option>
+                <option value="New Vally">New Vally</option>
+                <option value="Marsa Matrouh">Marsa Matrouh</option>
+                <option value="El Daqahliah">El Daqahliah</option>
+                <option value="El Suiz">El Suiz</option>
+                <option value="South Sina">South Sina</option>
+                <option value="El Mahalah">El Mahalah</option>
+            </select>
+            <input type="text" name="city" placeholder="City" required class="inp">
+            <input type="text" name="street" placeholder="Street" required class="inp">
+        </form>
+        <label id="label" for="showCurrentLocation">Your Current Location</label>
+        {% comment %} <input type="hidden" name="locat"  value="" required> {% endcomment %}
+        <div id="showCurrentLocation" class="show-location"></div>
+        <button id="submitButton" type="submit"   class="confirm" form="formLocation">Confirm Order</button>
+        <a href="{%url 'main'%}" class="add-another">Add Product</a>
+    </div>
+</div>
+
+
+{%if order_last%}
+
+<div class="container mt-5">
+    <h2 class="mb-4">Last Order</h2>
+    <div class="card">
+        <div class="card-header">
+            <h5>Last Order Details</h5>
+        </div>
+        <div class="card-body">
+            {%for item in order_items%}
+            <p><strong>Product Name:</strong> {{item.product}}</p>
+            <p><strong>Quantity:</strong> {{item.quantity}}</p>
+            {%endfor%}
+            <hr>
+            <p><strong>Delivery Address:</strong> {{order_last.shoping_address.address}}</p>
+            <p><strong>Delivery Day:</strong> {{order_last.order_date}}</p>
+        </div>
+    </div>
+</div>
+{%endif %}
+
+<script>
+
+    function showAlert(){
+        Swal.fire({
+            title: "Good",
+            text: "we will send you, wait!",
+            icon: "success"
+        });
+    setTimeout('',5000)
+    }
+    // Start Add Comment
+document.addEventListener('DOMContentLoaded', function () {
+    var addCommentBtn = document.getElementById('addCommentBtn');
+    var usernameInput = document.getElementById('usernameInput');
+    var commentInput = document.getElementById('commentInput');
+    var commentsContainer = document.getElementById('commentsContainer');
+    
+    addCommentBtn.addEventListener('click', function () {
+        var username = usernameInput.value;
+        var comment = commentInput.value;
+        
+        if (username && comment) {
+            saveComment(username, comment);
+            usernameInput.value = '';
+            commentInput.value = '';
+            displayComments();
+        }
+    });
+    
+    function saveComment(username, comment) {
+        var comments = localStorage.getItem('comments');
+        comments = comments ? JSON.parse(comments) : [];
+        
+        var newComment = {
+            username: username,
+            comment: comment,
+            likes: 0,
+            dislikes: 0
+        };
+        
+        comments.push(newComment);
+        localStorage.setItem('comments', JSON.stringify(comments));
+    }
+    
+    function displayComments() {
+        var comments = localStorage.getItem('comments');
+        comments = comments ? JSON.parse(comments) : [];
+        
+        var html = '';
+        
+        for (var i = 0; i < comments.length; i++) {
+            var comment = comments[i];
+            var likes = comment.likes;
+            var dislikes = comment.dislikes;
+            
+            html += '<div class="comment">';
+            html += '<div class="username">' + comment.username + '</div>';
+            html += '<div class="comment-text">' + comment.comment + '</div>';
+            html += '<div class="likes' + (likes > 0 ? ' active' : '') + '" onclick="likeComment(' + i + ')"><i class="fa fa-thumbs-up"></i> ' + likes + '</div>';
+            html += '<div class="dislikes' + (dislikes > 0 ? ' active' : '') + '" onclick="dislikeComment(' + i + ')"><i class="fa fa-thumbs-down"></i> ' + dislikes + '</div>';
+            html += '</div>';
+        }
+        
+        commentsContainer.innerHTML = html;
+    }
+    
+    window.likeComment = function (index) {
+        var comments = localStorage.getItem('comments');
+        comments = comments ? JSON.parse(comments) : [];
+        
+        var comment = comments[index];
+        
+        if (comment.likes <= 0) {
+            comment.likes++; // =1
+            comment.dislikes = 0;
+        } else {
+            comment.likes = 0;
+        }
+        
+        localStorage.setItem('comments', JSON.stringify(comments));
+        displayComments();
+    };
+    
+    window.dislikeComment = function (index) {
+        var comments = localStorage.getItem('comments');
+        comments = comments ? JSON.parse(comments) : [];
+        
+        var comment = comments[index];
+        
+        if (comment.dislikes <= 0) {
+            comment.likes = 0;
+            comment.dislikes++; // =1
+        } else {
+            comment.dislikes = 0;
+        }
+        
+        localStorage.setItem('comments', JSON.stringify(comments));
+        displayComments();
+    };
+    
+    displayComments();
+});
+// End Add Comment
+// Add Rating
+document.addEventListener("DOMContentLoaded", function() {
+    const stars = document.querySelectorAll('.star');
+    const ratingInput = document.getElementById('ratingInput');
+    let selectedRating = 0;
+
+stars.forEach(star => {
+    star.addEventListener('click', () => {
+        const value = star.getAttribute('data-value');
+        selectedRating = value;
+        setRating(selectedRating);
+    });
+});
+
+    function setRating(value) {
+        stars.forEach(star => {
+        star.classList.remove('active');
+    });
+
+    for (let i = 0; i < value; i++) {
+        stars[i].classList.add('active');
+    }
+
+    // قم بتعيين قيمة النجمة في الـ input الخفي
+    ratingInput.value = value;
+}
+});
+// End Rating
+// Start Order
+document.addEventListener('DOMContentLoaded', function() {
+
+    const removeButtons = document.querySelectorAll('.remove-btn');
+    
+    removeButtons.forEach(function (button) {
+        button.addEventListener('click', function () {
+            const card = button.closest('.card-content'); 
+            if (card) {
+                Swal.fire({
+                    title: 'Are you sure to delete this product?',
+                    icon: 'question',
+                    showCancelButton: true,
+                    confirmButtonText: 'Yes',
+                    cancelButtonText: 'No'
+                }).then((result) => {
+                    if (result.isConfirmed) {
+                        card.remove();
+                    } 
+                });
+            }
+        });
+    });
+
+const quantityContainers = document.querySelectorAll('.quantity-container');
+
+quantityContainers.forEach(function (container) {
+    const minusBtn = container.querySelector('.minus-btn');
+    const plusBtn = container.querySelector('.plus-btn');
+    const quantityInput = container.querySelector('.quantity-input');
+
+    minusBtn.addEventListener('click', function () {
+        let currentValue = parseInt(quantityInput.value);
+        if (currentValue > 1) {
+        quantityInput.value = currentValue - 1;
+    }
+    updateButtonStates();
+});
+
+    plusBtn.addEventListener('click', function () {
+    let currentValue = parseInt(quantityInput.value);
+    quantityInput.value = currentValue + 1;
+    updateButtonStates();
+});
+
+    function updateButtonStates() {
+    const currentValue = parseInt(quantityInput.value);
+    minusBtn.disabled = currentValue === 0;
+    plusBtn.disabled = currentValue > 5;
+}
+});
+
+    const currentLocationLink = document.getElementById("currentLocation");
+    currentLocationLink.addEventListener("click", function(event) {
+        // تجنب فتح الرابط الأصلي
+        event.preventDefault();
+        const form = document.getElementById('formLocation');
+        form.style.display = 'none';
+        const formFields = formLocation.querySelectorAll(".inp");
+        formFields.forEach(field => {
+            field.required = false;
+            field.value = "";
+        });
+    });
+    
+    document.getElementById('toggleForm').addEventListener('click', function() {
+        const showCurrentLocation = document.getElementById('showCurrentLocation');
+        showCurrentLocation.style.display = 'none';
+        const label = document.getElementById('label');
+        label.style.display = 'none';
+        const form = document.getElementById('formLocation');
+        const locationInput = document.getElementById('locationInput');
+        if (form.style.display === 'none' || form.style.display === '') {
+            form.style.display = 'block';
+        } else {
+            form.style.display = 'none';
+        }
+        locationInput.value = "";
+        const formFields = formLocation.querySelectorAll(".inp");
+        formFields.forEach(field => {
+            field.required = true;
+        });
+    });
+
+    const formLocation = document.getElementById("formLocation");
+    const locationInput = document.getElementById("locationInput");
+    const getLocationBtn = document.getElementById("currentLocation");
+
+        getLocationBtn.addEventListener("click", function() {
+            // start geolocation
+            // get coordinates from geolocation
+            if (navigator.geolocation) {
+                navigator.geolocation.getCurrentPosition(
+                    function(position) {
+                        const latitude = position.coords.latitude;
+                        const longitude = position.coords.longitude;
+                        // start open weather map
+                        // convert coordinates to names from open weather map
+                        const url = `http://api.openweathermap.org/geo/1.0/reverse?lat=${latitude}&lon=${longitude}&limit=1&appid=be79259c7f73c5a62a79c8df9d89d435`
+    
+                        async function get_location(url){
+                            const res = await fetch(url)
+                            const data = await res.json(); 
+                            
+                            const country = data[0].country; 
+                            const state = data[0].state;
+                            const city = data[0].name;
+                    
+                            locationInput.value = `${country} - ${state} - ${city}`;
+                            var val = locationInput.value;
+                            showCurrentLocation.style.display = 'block';
+                            showCurrentLocation.innerHTML = val;
+                            label.style.display = 'block';
+                        }
+                        get_location(url)
+                        // end open weather map
+
+                        Swal.fire({
+                            title: "Good job!",
+                            text: "Location retrieved successfully, Confirm order now",
+                            icon: "success"
+                        });
+                    },
+                    function(error) {
+                        if (error.code === error.PERMISSION_DENIED) {
+                            Swal.fire({
+                                title: "Sorry!",
+                                text: "Access to location was blocked. Please allow access to proceed.",
+                                icon: "error"
+                            });
+                            const locationInput = document.getElementById('locationInput');
+                            locationInput.required = true;
+                            const formFields = formLocation.querySelectorAll(".inp");
+                            formFields.forEach(field => {
+                                field.required = true;
+                            });
+                            showCurrentLocation.style.display = 'none';
+                            showCurrentLocation.innerHTML = '';
+                            label.style.display = 'none';
+                            return;
+                        }
+                    }
+                );
+            } else {
+                Swal.fire({
+                    title: "Sorry!",
+                    text: "Geolocation is not supported by your browser.",
+                    icon: "error"
+                });
+            }
+            // end geolocation
+        });
+});
+// End Order
+
+
+</script>
+
+{% comment %} <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script> {% endcomment %}
+<script src="{%static 'node_modules/sweetalert2/dist/sweetalert2.min.js'%}"></script>
+
+
+
+
+
+{%endblock%}
+

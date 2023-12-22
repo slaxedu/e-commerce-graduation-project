@@ -1,0 +1,138 @@
+{% extends "base.html" %}
+{%load static%}
+
+{%block title%} {{product_item.name}} {%endblock%}
+
+
+{% block css1%}
+<link rel="stylesheet" href="{%static 'css/description.css'%}">
+<link rel="stylesheet" href="{%static 'css/viewData.css'%}">
+    
+{%endblock%} 
+
+{%block content%}
+
+{%include 'view_product/nav.html'%}
+
+
+
+
+
+<div class="description" style='margin-top: 150px'>
+    <div class="content">
+        <div class="left-side">
+            <div class="cover-img"> <img src="{{product_item.image.url}}" alt="image"> </div>
+        </div>
+        <div class="right-side">
+            <p class="name">{{product_item.name|truncatechars:40}}</p>
+            <p class="des-product">{{product_item.description|truncatechars:100}}
+                <span><a href="{%url "all_comment" product_item.slug %}" >View All Details</a></span>
+            </p>
+            <p class="price">{{product_item.price}} EGP</p>
+            <p class="status" style='margin-bottom:8px'>Available</p>
+            <div class="add-cart"> <a href="{%url 'product_items' product_item.slug%}?add_cart={{product_item.slug}}">Add To Cart</a> </div>
+            <div class="buy"> <a href="{%url 'product_items' product_item.slug%}?add_cart={{product_item.slug}}&go=buy">Buy Now</a> </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+<div class="container">
+    <div class="content">
+        <form method="post" action=".">
+            {% csrf_token %}
+            <textarea id="commentInput" style="height: 150px;width: 850px;margin: auto;" class="main-input" name="message" placeholder="Write a Message"></textarea>
+            <div class="rating" id="rating">
+                <span class="star" data-value="1">&#9733;</span>
+                <span class="star" data-value="2">&#9733;</span>
+                <span class="star" data-value="3">&#9733;</span>
+                <span class="star" data-value="4">&#9733;</span>
+                <span class="star" data-value="5">&#9733;</span>
+                <input type="hidden" name="rating" id="ratingInput" value="">
+            </div>
+            <input type="submit" style="margin-right: 146px;margin-top: 35px;" value="publish" id="addCommentBtn">
+        </form>
+    </div>
+
+
+    {% comment %} <div id="commentsContainer"> {% endcomment %}
+        
+    <div>
+
+        <div style="    margin: 100px 0px -180px -142px;">
+            <h5>max rated: {{max}}</h5>
+            <h5>min rated: {{min}}</h5>
+            <h5>average:  {{average}}</h5>
+        </div>
+        <div>
+            <h2 style="margin-left: 130px;font-weight: 600;">({{num_comment}}) Reviews</h2>
+            {% for i in comments%}
+            <div class="comment" style="width: 850px;margin: auto; padding:0px; ">
+                <div class="username">{{i.user}}
+                    <span style="display: block;margin-left: 10px;color: dimgray;font-size: 12px;font-weight: 300;">{{i.crated_at}}</span>
+                </div>
+
+                <div class="comment-text">{{i.comment.comment}}</div>
+
+                <div class="rating" id="rating" style="position: inherit; cursor:default; pointer-events: none;">
+                    
+                    <span class="star {% if i.rate >= 1 %} active {%endif %}" >&#9733;</span>
+                    
+                    <span class="star {% if i.rate >= 2 %} active {%endif %}" >&#9733;</span>
+                    <span class="star {% if i.rate >= 3 %} active {%endif %}" >&#9733;</span>
+                    <span class="star {% if i.rate >= 4 %} active {%endif %} " >&#9733;</span>
+                    <span class="star {% if i.rate >= 5 %} active {%endif %}" >&#9733;</span>
+                </div>
+                
+                <hr>
+            </div>
+            {%endfor%}
+            {% if num_comment > 1 %}<div><a href="{%url "all_comment" product_item.slug %}" style="margin-left: 480px;">View All Review</a></div>{%endif %}
+        </div>
+    </div>
+
+
+    
+
+
+                <!-- Start Related Products -->
+    <div class="container">
+        <h4 style='min-width: 250px; '>Related Products</h4>
+        <div class="content-related" >
+            {%for prod in related_product%}
+            <a  href="{% url 'product_items'  prod.slug  %}" class="sec-related">
+                <div style="background-color: white;padding: 20px 30px 10px;border-radius: 15px;">
+                    <img src="{{ prod.image.url }}" style="width:120;height:100px" alt="image">
+                    <p>{{prod.name|truncatechars:40}}</p>
+                    <p>{{prod.price}} EGP</p>
+                </div>
+            </a>
+            {%endfor%}
+    </div>
+    <!-- End Related Products -->
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</div>
+
+
+
+<script src="{%static 'js/main.js'%}"></script>
+
+
+{%endblock%}

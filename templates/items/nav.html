@@ -1,0 +1,29 @@
+{% extends "base.html" %}
+{% comment %} {% extends 'base.html'%} {% endcomment %}
+
+{%load static%}
+{%block title%}Control Panel{%endblock%}
+{% block css1%}
+<link rel="stylesheet" href="{% static 'css/master.css'%}">
+<link rel="stylesheet" href="{% static 'css/foruser.css'%}">
+{%endblock%}
+{%block content%}
+<div class="nav">
+        <div class="content-nav">
+            <div class="sec-one">
+                <img src="{% static 'image/logo.png'%}" alt="logo">
+                <!-- <a class="logo-name">Hobah Click</a> -->
+            </div>
+            <ul class="sec-two">
+                <a href="{%url 'add_category'%}"><li>Categories</li></a>
+                <a href="{%url 'add_brand'%}"><li>Brand</li></a>
+                <a href="{%url 'add_product'%}"><li>Products</li></a>
+                <a href="{%url 'add_variation'%}"><li>Variation</li></a>
+                <a href="{%url 'addvariationOption'%}"><li>Variation Option</li></a>
+            </ul>
+        </div>
+    </div>
+
+
+      
+{%endblock%}

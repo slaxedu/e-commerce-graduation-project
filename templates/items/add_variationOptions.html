@@ -1,0 +1,39 @@
+{% extends "base.html" %}
+
+
+{%block title%}Add Variation Option{%endblock%}
+
+
+{%load static%}
+{% block css1%}
+<link rel="stylesheet" href="{% static 'css/bootstrap-5.3.2-dist/css/bootstrap.css'%}">
+<link rel="stylesheet" href="{% static 'css/bootstrap-5.3.2-dist/css/bootstrap.min.css'%}">
+<link rel="stylesheet" href="{%static 'css/formAdmin.css'%}">
+    
+{%endblock%} 
+
+{%block content%}
+
+{% include "items/nav.html" %} 
+
+
+<div class="content-admin-form" style='margin-top:140px'>
+    <h1>Add Variation Option</h1>
+    <form method='POST' action='.'>
+        {% csrf_token%}
+        <div class="descripe-product">
+            <div class="mb-3">
+                <label for="ProductName" class="form-label">Variation Name</label>
+                {{form_variation_option.variation_id}}
+            </div>
+        </div>
+        <div class="mb-3">
+            <label for="ProductImage" class="form-label">Variation Value</label>
+            {{form_variation_option.value}}
+        </div>
+
+        <button type="submit" class="btn btn-primary center">Submit</button>
+    </form>
+</div>
+{%endblock%}
+

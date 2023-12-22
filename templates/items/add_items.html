@@ -1,0 +1,78 @@
+{% extends "base.html" %}
+
+
+{%block title%}Add Product{%endblock%}
+
+
+{%load static%}
+{% block css1%}
+<link rel="stylesheet" href="{% static 'css/bootstrap-5.3.2-dist/css/bootstrap.css'%}">
+<link rel="stylesheet" href="{% static 'css/bootstrap-5.3.2-dist/css/bootstrap.min.css'%}">
+<link rel="stylesheet" href="{%static 'css/formAdmin.css'%}">
+    
+{%endblock%} 
+
+{%block content%}
+
+{% include "items/nav.html" %} 
+
+
+<div class="content-admin-form" style='margin-top:140px'>
+    <h1>Add Product</h1>
+    <form class="form-horizontal" role="form" method="POST" id="post-form" enctype="multipart/form-data">
+        {% csrf_token %}
+        <div class="descripe-product">
+            <div class="mb-3">
+                <label for="ProductName" class="form-label">Product Name</label>
+                {{add_product.name}}
+            </div>
+            <div class="mb-3">
+                <label for="ProductPrice" class="form-label">Price</label>
+                {{add_product.price}}
+            </div>
+        </div>
+        <div class="mb-3">
+            <label for="ProductImage" class="form-label">Product</label>
+            {{add_product.image}}
+        </div>
+        <div class="mb-3">
+            <label for="ProductImage" class="form-label">Category</label>
+            {{add_product.category_id}}
+        </div>
+        <div class="mb-3">
+            <label for="ProductImage" class="form-label">Brand</label>
+            {{add_product.brand_id}}
+        </div>
+
+        <div class="mb-3">
+            <label for="ProductImage" class="form-label">Quantity in Stock</label>
+            {{add_product.quantity_in_stock}}
+        </div>
+        <div class="mb-3">
+            <label for="ProductImage" class="form-label">Is Solid</label>
+            {{add_product.is_solid}}
+        </div>
+
+
+
+
+        <div class="mb-3">
+            <label for="ProductName" class="form-label">Description Name</label>
+            {{add_product.description}}
+        </div>
+        <button type="submit" class="btn btn-primary center">Submit</button>
+    </form>
+
+    {% if form.errors or form.non_field_errors%}
+
+    <div class='mb-3 p-6 bg-red-100 rounded-xl' style='color:red'>
+        {%for field in form%}
+            {{field.errors}}
+        {%endfor%}
+            {{form.non_field_errors}}
+    </div>
+
+    {%endif%}
+
+</div>
+{%endblock%}

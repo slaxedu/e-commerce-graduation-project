@@ -1,0 +1,78 @@
+<form class="form-horizontal" role="form" method="POST" id="post-form" enctype="multipart/form-data">
+    <input type="hidden" name="csrfmiddlewaretoken" value="uIxAVACd1GX2G8UlTgFAzl8jIiyCp2vfUXDEtgjhv5nF4Uo5tsMbSBAkNE8jRTRe">
+    <div class="descripe-product">
+        <div class="mb-3">
+            <label for="ProductName" class="form-label">Product Name</label>
+            <input type="text" name="name" placeholder="Product Name" class="form-control first-input" required="" id="id_name" fdprocessedid="vtsacq">
+        </div>
+        <div class="mb-3">
+            <label for="ProductPrice" class="form-label">Price</label>
+            <input type="text" name="price" placeholder="Price" class="form-control last-input" required="" id="id_price" fdprocessedid="rtkh4">
+        </div>
+    </div>
+    <div class="mb-3">
+        <label for="ProductImage" class="form-label">Product</label>
+        <input type="file" name="image" accept="image/*" id="id_image">
+    </div>
+    <div class="mb-3">
+        <label for="ProductImage" class="form-label">Category</label>
+        <select name="category_id" required="" id="id_category_id" fdprocessedid="fnlizg">
+<option value="" selected="">---------</option>
+
+<option value="162">Mobiles &amp; Tablets</option>
+
+<option value="163">Mobile Accessories</option>
+
+<option value="164">Headphones</option>
+
+<option value="165">Computer &amp; Laptops</option>
+
+<option value="166">Computer Accessories</option>
+
+<option value="167">Televisions</option>
+
+</select>
+    </div>
+    <div class="mb-3">
+        <label for="ProductImage" class="form-label">Brand</label>
+        <select name="brand_id" id="id_brand_id" fdprocessedid="9mpt8u">
+<option value="" selected="">---------</option>
+
+<option value="6">Samsung</option>
+
+<option value="7">Sony</option>
+
+<option value="8">Apple</option>
+
+<option value="9">Lenvo</option>
+
+<option value="10">Xiaomi</option>
+
+<option value="11">Honor</option>
+
+<option value="12">Oppo</option>
+
+<option value="13">Huawei</option>
+
+<option value="14">Nokia</option>
+
+<option value="15">JBL</option>
+
+</select>
+    </div>
+
+    <div class="mb-3">
+        <label for="ProductImage" class="form-label">Quantity in Stock</label>
+        <input type="number" name="quantity_in_stock" value="True" required="" id="id_quantity_in_stock" fdprocessedid="3wnygg">
+    </div>
+    <div class="mb-3">
+        <label for="ProductImage" class="form-label">Is Solid</label>
+        <input type="checkbox" name="is_solid" id="id_is_solid">
+    </div>
+
+    <div class="mb-3">
+        <label for="ProductName" class="form-label">Description Name</label>
+        <textarea name="description" cols="40" rows="10" placeholder="Description" class="form-control first-input" required="" id="id_description"></textarea>
+    </div>
+    <button type="submit" class="btn btn-primary center" fdprocessedid="kv5u3q">Submit</button>
+</form>

@@ -1,0 +1,59 @@
+{%load static%}
+
+    <div class="nav">
+        <div class="content-nav">
+            <div class="sec-one">
+                <a href="{%url 'main'%}">
+                    <img src="{%static 'image/logo.png'%}" style=" width: 140px;height: 100%;" alt="logo">
+                </a>
+                <div class="center">
+                    <form method="get" action="{%url 'home'%}">
+                        
+                        <div>
+                            <input type="text" name="q" placeholder="type your product here!">
+                            <button><i class="fa-solid fa-magnifying-glass search"></i></button>
+                        </div>
+                        
+                    </form>
+                    <div class="register">
+                        <i class="fa-solid fa-user"></i>
+                        {% if request.user.is_authenticated%}
+                        <a style='margin-right:10px' href="{%url 'user_update' request.user.id%}" class="register">{{request.user}}</a>
+                        {% comment %} <a  href="{%url 'log_out'%}" class="register">Register</a> {% endcomment %}
+                    </div>
+                    {% comment %} <a  href="{%url 'register'%}" class="register">{{request.user}}</a> {% endcomment %}
+                        
+                    {%else%}
+                    
+                        <a style='margin-right:10px' href="{%url 'login'%}" class="register">Log in</a>
+                            
+                        </div>
+                        <a  href="{%url 'register'%}" class="register">Register</a>
+                    {%endif%}
+                </div>
+            </div>
+            <ul class="sec-two">
+                <div class="sanme-style"><a href="{%url 'home'%}"><li>Electronics</li></a></div>
+                <div class="sanme-style"> <a href="{%url 'category_home' 'mobile_tablets' %}"><li>Mobile</li></a> </div>
+                <div class="sanme-style"> <a href="{%url 'category_home' 'computer_laptops' %}"><li>Computer & Laptops</li></a> </div>
+                {% comment %} <div class="sanme-style"> <a href="#"><li>Men</li></a> </div>
+                <div class="sanme-style"> <a href="#"><li>Women</li></a> </div> {% endcomment %}
+                <div class="sanme-style"> <a href="{%url 'main' %}"><li>Home</li></a> </div>
+             
+                <div class="car"> <a href="{%url 'cart'%}" >  <img style='margin-left: 24px;background: white;border-radius: 5px; padding: 6px; width: 40px;' src="{%static 'image/cart.svg'%}" alt="cart">
+                    {%if number_product%}
+                    <span style="    background-color: red;
+                    color: white;
+                    padding: 7px;
+                    position: absolute;
+                    border-radius: 55px;
+                    margin-left: -23px;
+                    margin-top: -15px;
+                    font-size: 13px;
+                    font-weight: bold;">{{number_product}}</span>
+                    {%endif%}
+                </a> </div>
+            </ul>
+        </div>
+    </div>
+    <!-- End Navbar -->

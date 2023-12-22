@@ -1,0 +1,251 @@
+/* End Global Attributes */
+* {
+    box-sizing: border-box;
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+html {
+    scroll-behavior: smooth;
+}
+body {
+    font-family: 'Cairo', sans-serif;
+    font-family: 'Roboto', sans-serif;
+    background-color: #f2f2f2;
+}
+ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+/* End Global Attributes */
+/*Start Navbar*/
+.nav {
+    position: relative;
+}
+.nav .content-nav {
+    background-color: black;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    height: 80px;
+    width: 100%;
+    padding: 5px;
+}
+.nav .content-nav .sec-one {
+    margin-left: 10px;
+    display: flex;
+    align-items: center;
+}
+.nav .content-nav .sec-one img {
+    width: 80px;
+    height: 80px;
+}
+.nav .content-nav .sec-one .center {
+    margin: auto;
+    display: flex;
+    align-items: center;
+}
+.nav .content-nav .sec-one .center form input {
+    width: 550px;
+    height: 40px;
+    border-radius: 10px;
+    border: 2px solid white;
+    padding-left: 10px;
+    font-size: 16px;
+}
+.nav .content-nav .sec-one .center form input:focus{
+    outline: none;
+}
+.nav .content-nav .sec-one .center .register i{
+    color: white;
+    margin-left: 20px;
+}
+.nav .content-nav .sec-one .center .register {
+    color: white;
+    text-decoration: none;
+    cursor: pointer;
+}
+.nav .content-nav .sec-one .locations {
+    color: white;
+    text-decoration: none;
+    width: fit-content;
+    text-align: center;
+    padding: 10px 20px;
+}
+.nav .content-nav .sec-one .locations:hover{
+    background-color: white;
+    color: black;
+}
+.nav .content-nav .sec-one .center .register a{
+    padding: 10px 20px;
+}
+.nav .content-nav .sec-one .center .register:hover a{
+    background-color: white;
+    color: black;
+}
+.nav .content-nav .sec-one .center form div {
+    position: relative;
+}
+.nav .content-nav .sec-one .center form .search {
+    position: absolute;
+    right: 20px;
+    top: 12px;
+    color: black;
+}
+.nav .content-nav .sec-two {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-right: 40px;
+}
+.nav .content-nav .sec-two .sanme-style {
+    width: fit-content;
+    height: 40px;
+    padding: 10px 20px;
+    text-align: center;
+}
+.nav .content-nav .sec-two .sanme-style a{
+    text-decoration: none;
+    color: white;
+}
+.nav .content-nav .sec-two .sanme-style:hover{
+    background-color: white;
+    color: black;
+}
+.nav .content-nav .sec-two .sanme-style:hover a{
+    color: black;
+}
+.nav .content-nav .sec-two .cart a img {
+    width: 40px;
+    height: 40px;
+    background-color: white;
+    margin-left: 10px;
+    border-radius: 5px;
+}
+.nav .content-nav .sec-two .cart a img:hover{
+    background-color: yellow;
+}
+/*End Navbar*/
+/* Start Brand And Category Carousel */
+.content-carousel{
+    margin: 50px 0;
+}
+.content-carousel .carousel {
+    width: 1320px;
+    margin: auto;
+}
+.content-carousel .carousel a {
+    text-decoration: none;
+}
+.content-carousel .brand-head,
+.content-carousel .category-head {
+    text-transform: uppercase;
+    margin: 10px 0 20px 110px;
+}
+.content-carousel .carousel .content .card {
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+    background-color: white;
+    position: relative;
+}
+.content-carousel .carousel .content .card img {
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+    position: absolute;
+    top: 0;
+    left: 50%;
+    transform: translate(-50%);
+    border: 2px solid red;
+}
+.content-carousel .carousel .content h2 {
+    margin: 10px 0;
+}
+.content-carousel .carousel .content {
+    width: 115px;
+    text-align: center;
+}
+.content-carousel .carousel .content h2 {
+    font-size: 16px;
+    color: red;
+}
+/* End Brand And Category Carousel */
+/* Start Change Theme */
+.slick-prev:before, .slick-next:before {
+    font-family: 'slick';
+    font-size: 25px;
+    color: black;
+    -webkit-font-smoothing: antialiased;
+    position: absolute;
+    top: -20px;
+    left: -8px;
+    display: none;
+}
+/* End Change Theme */
+/*Start Cards */
+.con h2 {
+    width: 160px;
+    padding: 5px;
+    background-color: black;
+    color: #10cab7;
+    /* font-size: 22px; */
+    text-transform: capitalize;
+    margin: 30px auto;
+    border-radius: 10px;
+    text-align: center;
+}
+.con .portfolio-content {
+    display: grid;
+    grid-template-columns: repeat(auto-fill , minmax(200px , 1fr));
+    gap: 10px;
+    width: 1200px;
+    right: 10px;
+    margin: 0 auto;
+}
+.con .portfolio-content .port {
+    background-color: white;
+    border-radius: 10px;
+    text-align: center;
+}
+.con .portfolio-content .port img {
+    width: 200px;
+    height: 200px;
+    border-radius: 7px;
+    margin-top: 13px;
+}
+.con .portfolio-content .port .text {
+    padding: 20px;
+    text-align: left;
+}
+.con .portfolio-content .port .text h3{
+    margin-bottom: 10px;
+}
+.con .portfolio-content .port .text p{
+    margin-bottom: 3px;
+}
+.con .portfolio-content .text .description {
+    margin: 0;
+}
+.con .portfolio-content .text .price {
+    color: red; 
+    line-height: 1.6;
+    margin-bottom: 0;
+}
+/* End Cards */
+/* Start Footer */
+.footer {
+    background-color: black;
+    padding: 30px;
+    text-align: center;
+    color: white;
+    font-size: 18px;
+    margin-top: 30px;
+}
+.footer span {
+    color: #10cab7;
+    font-weight: bold;
+}
+/* End Footer */

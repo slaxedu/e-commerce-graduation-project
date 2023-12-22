@@ -1,0 +1,60 @@
+{% extends "base.html" %}
+
+
+{%block title%}Add Category{%endblock%}
+
+
+{%load static%}
+{% block css1%}
+<link rel="stylesheet" href="{% static 'css/bootstrap-5.3.2-dist/css/bootstrap.css'%}">
+<link rel="stylesheet" href="{% static 'css/bootstrap-5.3.2-dist/css/bootstrap.min.css'%}">
+<link rel="stylesheet" href="{%static 'css/formAdmin.css'%}">
+    
+{%endblock%} 
+
+{%block content%}
+
+{% include "items/nav.html" %} 
+
+<style>
+
+    @media (max-width: 1030px) {
+        .visb{
+            display:none;
+        }
+    }
+
+</style>
+
+
+<div style="margin: 252px 84px 15px 26px;position: absolute; " class='visb'>
+{% for cat in categories%}
+
+<div style="margin-bottom:20px">{{cat}}                    
+    {% if user.is_superuser %}
+
+    <a href="{%url 'edit_category' cat.slug %}"><button type="button" class="btn btn-primary" style="    background: none;color: blue;border: none;text-decoration-line: underline;">Update</button></a>
+    <a href="{%url 'delete_category' cat.slug %}"><button type="button" class="btn btn-danger" style="    background: none;color:red;border: none;text-decoration-line: underline;">Delete</button></a>
+
+    {%endif %}</div>
+{%endfor%}
+</div>
+<div class="content-admin-form" style='margin-top:250px'>
+    <h1>Add Category</h1>
+    <form method='POST' action='.'  enctype='multipart/form-data'>
+        {% csrf_token%}
+        <div class="descripe-product">
+            <div class="mb-3">
+                <label for="ProductName" class="form-label">Category Name</label>
+                {{form_category.category_name}}
+            </div>
+        </div>
+        <div class="mb-3">
+            <label for="ProductImage" class="form-label">Category Image</label>
+            {{form_category.image}}
+        </div>
+        <button type="submit" class="btn btn-primary center">Submit</button>
+    </form>
+</div>
+{%endblock%}
+

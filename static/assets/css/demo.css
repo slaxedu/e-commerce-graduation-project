@@ -1,0 +1,93 @@
+/* End Global Attributes */
+* {
+    box-sizing: border-box;
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+html {
+    scroll-behavior: smooth;
+}
+body {
+    font-family: 'Cairo', sans-serif;
+    font-family: 'Roboto', sans-serif;
+}
+ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+/* End Global Attributes */
+.nav {
+    position: relative;
+}
+.nav .content-nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    height: 80px;
+    width: 100%;
+    padding: 5px;
+}
+.register i{
+    color: white;
+    margin-left: 20px;
+}
+.register {
+    color: white;
+    text-decoration: none;
+    cursor: pointer;
+}
+.register a{
+    padding: 10px;
+}
+.register:hover a{
+    background-color: white;
+    color: black;
+}
+.login {
+    color: white;
+    text-decoration: none;
+    cursor: pointer;
+}
+.login a{
+    padding: 10px;
+}
+.login:hover a{
+    background-color: white;
+    color: black;
+}
+.nav .content-nav .sec-two {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-right: 40px;
+}
+.nav .content-nav .sec-two .sanme-style {
+    width: fit-content;
+    height: 40px;
+    padding: 10px 20px;
+    text-align: center;
+}
+.nav .content-nav .sec-two .sanme-style a{
+    text-decoration: none;
+    color: white;
+}
+.nav .content-nav .sec-two .sanme-style:hover{
+    background-color: white;
+    color: black;
+}
+.nav .content-nav .sec-two .sanme-style:hover a{
+    color: black;
+}
+.nav .content-nav .sec-two .cart a img {
+    width: 40px;
+    height: 40px;
+    background-color: white;
+    margin-left: 10px;
+    border-radius: 5px;
+}
+.nav .content-nav .sec-two .cart a img:hover{
+    background-color: yellow;
+}

@@ -1,0 +1,130 @@
+{% extends "base.html" %}
+{%load static%}
+
+{%block title%} Product {%endblock%}
+
+
+{% block css1%}
+<link rel="stylesheet" href="{%static 'css/viewData.css'%}">
+    
+{%endblock%} 
+
+
+{%block content%}
+
+{%include 'view_product/nav.html'%}
+
+<style>
+    a {  
+        text-decoration: none;
+        cursor: pointer;
+        color: inherit;
+    }
+</style>
+<!-- Start viewData -->
+<div class="portfolio">
+    <div class="filter" style="display:flex">
+        <ul>
+            <li style='margin-top:10px'><h3>Category</h3></li>
+
+            {% for categ in category_all%}
+            {% comment %} <a href=""> <li>{{categ}}</li> </a> {% endcomment %}
+            
+            {% comment %} <a href="{% url 'home' %}?q={{q}}&category={{categ.id}}"><li>{{categ.category_name}}</li></a> {% endcomment %}
+            <a href="{% url 'category_home' categ.slug %}"><li>{{categ.category_name}}</li></a>
+            {% endfor%}
+            
+        </ul>
+    </div>
+    <div class="content">
+        <div class="sidebar" style="overflow-y: scroll;left:20px; width:280px;" >
+            <div class="content-sidebar">
+                <a href="{%url 'home'%}"><button type="button" class="btn btn-secondary" style='width: 92px;height: 35px;font-size: smaller; margin-bottom:25px;'>Clear filter</button></a>
+                <p>Brand</p>
+                <ul   style="overflow-y: scroll;max-height: 250px;">
+                    
+                    {%for b in brand%}
+                    <a href="{%if slug%}{%url 'category_home' slug %}{%else%}{%url 'home' %}{%endif%}?q={{q}}&br={{b.id}}"> <li>{{b.name}}</li> </a>
+                    {% comment %} <a href="{%url 'category_home' %}?q={{q}}&br={{b.id}}"> <li>{{b.name}}</li> </a> {% endcomment %}
+                    {%endfor%}
+                    
+                </ul>
+                {% comment %} <div data-qa="Price (EGP)" class="sc-edafd5e3-0 hvUgVI">
+                    <div class="sc-edafd5e3-1 ijzhWh">
+                        <div class="sc-edafd5e3-3 bhslqT">
+                            <div class="sc-edafd5e3-3 bhslqT" style='font-weight: bold;'>
+                                <span>Price (EGP)</span>
+                            </div>
+                            
+                        </div>
+                    </div>
+                    <form method='get' action='.' class="sc-edafd5e3-2 iFeebC">
+                        <div class="sc-da70c56-0 lfWCOx">
+                        <input style='width:70px' type="number" required placeholder='min' name="min" class="textInput" aria-label="min" data-qa="filter-min-input" value="{{min_price}}" fdprocessedid="o18pap">
+                        <span class="between to">To</span>
+                        <input style='width:70px' type="number" required name="max" placeholder='max' class="textInput" aria-label="max" data-qa="filter-max-input" value="{{max_price}}" fdprocessedid="wgyufb">
+                        <button type="sumbit" class="btn btn-primary" style='width: 40px;height: 30px;padding: 0;'>Go</button>
+                    </div>
+                </form>
+            </div> {% endcomment %}
+            </div>
+        </div>
+        <div class="right-side">
+            <div class="portfolio-content">
+                {%for prod in product%}
+                <div class="port" style='position: relative;'>
+                    <div style=" height:200px"><a href="{% url 'product_items'  prod.slug   %}"    ><img  src="{{ prod.image.url }}" alt="Uploaded Image"></a></div>
+                    {% comment %} <a href="{% url 'product_items' prod.id %}"   style="width:136px; height:176px" ><img  src="{{ prod.image.url }}" alt="Uploaded Image"></a> {% endcomment %}
+                    <div class="text" style="margin-top: 25px;">
+                        <a href="{% url 'product_items'  prod.slug   %}"  class="my_class"><h3 style='margin-bottom: 10px;'>{{prod.name|truncatechars:26}}</h3></a>
+                        {% comment %} <a href="{% url 'product_items' prod.id %}"  class="my_class"><h3 style='margin-bottom: 10px;'>{{prod.name}}</h3></a> {% endcomment %}
+                        <p class="description" style='margin-bottom: 5px;'>{{prod.description|truncatechars:30}}</p>
+                        <a class="price">{{prod.price}} EGP</a>
+                    </div>
+                    {% if user.is_superuser %}
+                    <div style='padding: 6px 15px 15px;'>
+                    <a href="{%url 'edit_product' prod.slug  %}"><button type="button" class="btn btn-primary">Update</button></a>
+                    <a href="{%url 'delete_product' prod.slug  %}"><button type="button" class="btn btn-danger">Delete</button></a>
+                    </div>
+                    {%endif %}
+                </div>
+                {%endfor%}
+
+                {% comment %} {% if product.number > 1 %} {% endcomment %}
+                <div aria-label="..." style='position: relative; margin-left:501px; margin-bottom:60px;'>
+                <ul class="pagination">
+                 {%if product.has_previous%}
+                  <li class="page-item ">
+                    <a class="page-link" href="{%if slug%}{%url 'category_home' slug %}{%else%}{%url 'home' %}{%endif%}?{%if cat_id%}category={{cat_id}}&{%endif%}page={{product.previous_page_number}}" tabindex="-1">Previous</a>
+                  </li>
+                  <li class="page-item"><a class="page-link" href="{%if slug%}{%url 'category_home' slug %}{%else%}{%url 'home' %}{%endif%}?{%if cat_id%}category={{cat_id}}&{%endif%}page={{product.previous_page_number}}">{{product.previous_page_number}}</a></li>
+
+                  {%endif%}
+                
+                  <li class="page-item active">
+                    <a class="page-link" href="#">{{product.number}} <span class="sr-only">(current)</span></a>
+                  </li>
+                  {% if product.has_next%}
+                  <li class="page-item"><a class="page-link" href="{%if slug%}{%url 'category_home' slug %}{%else%}{%url 'home' %}{%endif%}?{%if cat_id%}category={{cat_id}}&{%endif%}page={{product.next_page_number}}">{{product.next_page_number}}</a></li>
+
+                <li class="page-item">
+                    <a class="page-link" href="{%if slug%}{%url 'category_home' slug %}{%else%}{%url 'home' %}{%endif%}?{%if cat_id%}category={{cat_id}}&{%endif%}page={{product.next_page_number}}">Next</a>
+                </li>
+                
+                {% comment %} {%endif%} {% endcomment %}
+                </ul>
+                </div>
+                {%endif%}
+            </div>
+            
+
+        </div>
+    </div>
+
+</div>
+
+<!-- End viewData -->
+
+
+{%endblock%}
+

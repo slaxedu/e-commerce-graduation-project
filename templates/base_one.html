@@ -1,0 +1,24 @@
+{%load static%}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <!--begin::Fonts(mandatory for all pages)-->
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Inter:300,400,500,600,700" />
+    <!--end::Fonts-->
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <!--begin::Global Stylesheets Bundle(mandatory for all pages)-->
+    <title>{%block title%}{%endblock%}</title>
+    <link href="{%static 'assets/css/plugins.bundle.css'%}" rel="stylesheet" type="text/css" />
+    <link href="{%static 'assets/css/style.bundle.css'%}" rel="stylesheet" type="text/css" />
+    <link href="{%static 'assets/css/demo.css'%}" rel="stylesheet" type="text/css" />
+    {% block css1%}{%endblock%}
+    <!--end::Global Stylesheets Bundle-->
+</head>
+<body id="kt_body" class="header-fixed header-tablet-and-mobile-fixed">
+    {%block content%}
+    {%endblock%}
+    <script src="{%static 'assets/js/plugins.bundle.js'%}"></script>
+    <script src="{%static 'assets/js/scripts.bundle.js'%}"></script>
+</body>
+</html>
