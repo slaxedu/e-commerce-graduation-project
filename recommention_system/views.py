@@ -262,7 +262,7 @@ def main(request):
                     recently_product.append(Product.objects.get(slug=product_name))
     else:
         recently_product = []
-    recently_product = []
+
 
     number = 0
     if request.user:
@@ -302,7 +302,9 @@ def main(request):
     }
     return render(request, 'home/main.html', context)
 
+def not_found(request, exception):
 
+    return render(request, 'home/notfound.html',{}, status=404)
 
 
 

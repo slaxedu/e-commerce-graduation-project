@@ -16,11 +16,11 @@
                         
                     </form>
                     <div class="register">
-                        <i class="fa-solid fa-user"></i>
+                        {% comment %} <i class="fa-solid fa-user"></i> {% endcomment %}
                         {% if request.user.is_authenticated%}
                         <a style='margin-right:10px' href="{%url 'user_update' request.user.id%}" class="register">{{request.user}}</a>
-                        {% comment %} <a  href="{%url 'log_out'%}" class="register">Register</a> {% endcomment %}
                     </div>
+                    <a  href="{%url 'logout'%}" class="register">LogOut</a>
                     {% comment %} <a  href="{%url 'register'%}" class="register">{{request.user}}</a> {% endcomment %}
                         
                     {%else%}

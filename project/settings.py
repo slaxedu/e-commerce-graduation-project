@@ -24,9 +24,9 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = 'django-insecure-&$!4e^!uj9%uau8x38ootvy0@frp-es8ecm$shr_b^z36w_)po'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['*']
 
 
 # Application definition
@@ -151,8 +151,8 @@ EMAIL_HOST = 'smtp.gmail.com'
 EMAIL_PORT = '587'
 # EMAIL_HOST_USER = 'shoping.onlin.1e.6@gmail.com'
 # EMAIL_HOST_PASSWORD = 'nxcy poki szvq oblf'
-EMAIL_HOST_USER = 'X_Store-ShopingOnline@outlook.com'
-EMAIL_HOST_PASSWORD = 'SQUPW-WHXDM-WW6UA-8S8T2-5YKTW'
+EMAIL_HOST_USER = 'ahmedalngar221u@gmail.com'
+EMAIL_HOST_PASSWORD = 'sucxqxshvnqvbwls'
 
 EMAIL_USE_TLS = True
 # Default primary key field type
@@ -161,5 +161,4 @@ EMAIL_USE_TLS = True
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 LOGIN_REDIRECT_URL = '/home/'
-
 

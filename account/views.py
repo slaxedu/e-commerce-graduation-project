@@ -25,8 +25,8 @@ def register(request):
     if request.method == 'POST':
         reg = RegisterForm(request.POST)
         if reg.is_valid():
-            # reg.save()
-            print(request.POST)
+            reg.save()
+            # print(request.POST)
             return redirect('login')
     else:
         reg = RegisterForm()
@@ -34,11 +34,9 @@ def register(request):
     return render(request, 'account/register.html', context)
 
 # @login_required('register')
-# def log_out(request):
-#     # logout(request)
-#     # return redirect('home')
-#     print('nothing')
-
+def log_out(request):
+    logout(request)
+    return redirect('home')
 
 
 def user_update(request, pk):
