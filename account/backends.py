@@ -17,6 +17,4 @@ class EmailBackend(ModelBackend):
             user = UserModel.objects.filter(Q(phone_number__iexact=username) | Q(email__iexact=username)).order_by('id').first()
 
         if user.check_password(password) and self.user_can_authenticate(user):
-            # if user.objects.filter(is__stuff=True):
-                
             return user

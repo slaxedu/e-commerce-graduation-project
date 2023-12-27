@@ -7,7 +7,7 @@ from cart_shop.models import Cart
 from django.core.paginator import Paginator
 from django.db.models import Avg, Max, Min, Count
 from django.contrib.postgres.search import SearchQuery, SearchRank, SearchVector
-
+from .models import ClickCount
 
 
 def home(request):
@@ -23,7 +23,6 @@ def home(request):
     query = request.GET.get('q', '')
     vector = SearchVector('name')
     search_query = SearchQuery(query)
-
     categ = request.GET.get('category', 0)
     br = request.GET.get('br', 0)
     def cat_return(categ):
@@ -39,17 +38,12 @@ def home(request):
         # product_p = p.filter(category_id_id = categ)
         if br:
             product= product.filter(category_id_id = categ).filter(brand_id_id = br)
-
     if br:
         product = product.filter(brand_id_id = br)
-
     p = Paginator(product, 28)
     page = request.GET.get('page')
     product_p = p.get_page(page)
-
     brand = Brand.objects.all()
-    
-
     context = {"category": category[0:4],
                 "cat_id": cat_id ,
                 "category_all": category[0:15],
@@ -187,6 +181,20 @@ def product_items(request, slug):
         max_rating = 0
         min_rating = 0
         average_rating=0
+
+
+
+    
+    click = ClickCount.objects.get_or_create(product=product_item)
+    
+    if click:
+        click = ClickCount.objects.filter(product=product_item)
+        
+        for x in click:
+            print(x)
+            click.update(count=x.count+1)
+
+
 
     context = {
         "comments": comment[0:3],

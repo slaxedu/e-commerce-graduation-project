@@ -74,11 +74,9 @@ def add_items(request):
         form = NewProduct()
     context = {'add_product': form}
     return render(request, 'items/add_items.html', context)
-
 def update_items(request ,slug):
     # item = get_object_or_404(Product, name=name,pk=pk)
     item = Product.objects.get(slug=slug)
-
     if request.method == 'POST':
         form = NewProduct(request.POST, request.FILES, instance=item)
         if form.is_valid():
@@ -91,10 +89,6 @@ def update_items(request ,slug):
         form = NewProduct(instance=item)
     context = {'add_product': form}
     return render(request, 'items/add_items.html',context)
-
-
-
-
 def delete_items(request, slug):
     # item = Product.objects.get(pk=pk)
     item = get_object_or_404(Product,slug=slug)

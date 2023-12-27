@@ -56,6 +56,48 @@
     </div>
     {%endif%}
     <!-- End Cards Section Two -->
+     <!-- Start Cards Section Two -->
+    <div class="con">
+        <h2 style="width: 240px;">Trending</h2>
+        <div class="portfolio-content">
+            {%for prod in trending%}
+            <div class="port">
+                <a href="{% url 'product_items'  prod.slug   %}"><img src="{{prod.image.url}}" alt="picture"></a>
+                <div class="text">
+                    <a href="{% url 'product_items'  prod.slug   %}" style="text-decoration: none;color: black;"><h4>{{prod.name|truncatechars:22}}</h4></a>
+                    <p class="description">{{prod.description|truncatechars:20}}</p>
+                    <a class="price" style="text-decoration: none;">{{prod.price}} EGP</a>
+                </div>
+            </div>
+            {%endfor%}
+        
+            
+            
+        </div>
+    </div>
+
+    <!-- End Cards Section Two -->
+     <!-- Start Cards Section Two -->
+    <div class="con">
+        <h2 style="width: 360px; padding:10px">Recommend For You</h2>
+        <div class="portfolio-content">
+            {%for prod in recommend%}
+            <div class="port">
+                <a href="{% url 'product_items'  prod.slug   %}"><img src="{{prod.image.url}}" alt="picture"></a>
+                <div class="text">
+                    <a href="{% url 'product_items'  prod.slug   %}" style="text-decoration: none;color: black;"><h4>{{prod.name|truncatechars:22}}</h4></a>
+                    <p class="description">{{prod.description|truncatechars:20}}</p>
+                    <a class="price" style="text-decoration: none;">{{prod.price}} EGP</a>
+                </div>
+            </div>
+            {%endfor%}
+        
+            
+            
+        </div>
+    </div>
+
+    <!-- End Cards Section Two -->
 
     <!-- Start Cards Section One -->
     <div class="con">
@@ -95,9 +137,9 @@
     <!-- Start Cards Section Two -->
     {% if recently_product%}
     <div class="con">
-        <h2 style="width: 240px;">Recently</h2>
+        <h2 style="width: 360px; padding:10px;">Maybe You Like It</h2>
         <div class="portfolio-content">
-            {%for prod in recently_product%}
+            {%for prod in recommend2%}
             <div class="port">
                 <a href="{% url 'product_items'  prod.slug   %}"><img src="{{prod.image.url}}" alt="picture"></a>
                 <div class="text">

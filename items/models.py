@@ -30,6 +30,7 @@ class Product(models.Model):
     price = models.FloatField(default=True)
     is_solid = models.BooleanField(default=False)
     slug = models.SlugField(unique=True, max_length=255)
+    count = models.IntegerField(default=1)
     # class Meta:
     #     indexes = [GinIndex(fields=['name'])]
     def __str__(self):
@@ -44,8 +45,8 @@ class Review(models.Model):
     comment = models.ForeignKey(Comment, on_delete=models.CASCADE)
     rate = models.FloatField(validators=[MinValueValidator(0.0), MaxValueValidator(5.0)])
     crated_at = models.DateTimeField(auto_now_add=True)
-    def __str__(self):
-        return self.comment
+    # def __str__(self):
+    #     return self.user
 
 class Variation(models.Model):
     product_id = models.ForeignKey(Product,default=True, on_delete=models.CASCADE)

@@ -46,12 +46,16 @@ Operating System	Windows
 def web(request):
 
     # cat = Category.objects.get(category_name='Monitors')
-    cat = Category.objects.all()
+    # cat = Category.objects.all()
     # br = Brand.objects.get(name='Apple')
 
     # print(br)
-
-
+    # product = Product.objects.all().order_by('id')
+    # j = 1
+    # for i in product:
+    #     Product.objects.filter(id=i.id).update(count=j)
+    #     print(j)
+    #     j+=1
 
     # page = requests.get("https://dream2000.com/en/laptop-notebook/monitors.html")
     
@@ -97,32 +101,32 @@ def web(request):
     #             continue
     #         k +=1
     
-    user_cookie = request.COOKIES.get('csrftoken','')
-    user_session_id = request.COOKIES.get('sessionid','')
-    user_os = request.META['OS']
-    user_name = request.META['USERNAME']
-    user_computer_name = request.META['COMPUTERNAME']
-    user_core = request.META['NUMBER_OF_PROCESSORS']
-    user_name = request.META['USERNAME']
+#     user_cookie = request.COOKIES.get('csrftoken','')
+#     user_session_id = request.COOKIES.get('sessionid','')
+#     user_os = request.META['OS']
+#     user_name = request.META['USERNAME']
+#     user_computer_name = request.META['COMPUTERNAME']
+#     user_core = request.META['NUMBER_OF_PROCESSORS']
+#     user_name = request.META['USERNAME']
 
-    user_agent = request.META.get('HTTP_USER_AGENT', '')
-    ip_address = request.META.get('REMOTE_ADDR', '')
-    referrer = request.META.get('HTTP_REFERER', '')
-    accepted_languages = request.META.get('HTTP_ACCEPT_LANGUAGE', '')
+#     user_agent = request.META.get('HTTP_USER_AGENT', '')
+#     ip_address = request.META.get('REMOTE_ADDR', '')
+#     referrer = request.META.get('HTTP_REFERER', '')
+#     accepted_languages = request.META.get('HTTP_ACCEPT_LANGUAGE', '')
 
-    print(f"1- {user_agent}")
-    print(f"2- {ip_address}")
-    print(f"3- {referrer}")
-    print(f"4- {accepted_languages}")
+#     print(f"1- {user_agent}")
+#     print(f"2- {ip_address}")
+#     print(f"3- {referrer}")
+#     print(f"4- {accepted_languages}")
 
-# Analyze or log the collected information
+# # Analyze or log the collected information
 
 
-    print(user_cookie)
-    print(user_session_id)
-    print(user_os)
-    print(user_name)
-    print(user_computer_name)
+#     print(user_cookie)
+#     print(user_session_id)
+#     print(user_os)
+#     print(user_name)
+#     print(user_computer_name)
     # print(user_name)
     # print(user_core)
     # print(request.META)
