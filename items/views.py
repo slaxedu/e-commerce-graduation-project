@@ -10,9 +10,8 @@ from django.urls import reverse
 # Create your views here.
 @user_passes_test(lambda u: u.is_superuser)
 def admin_panel(request):
+    return redirect('add_category')
 
-    context = {}
-    return render(request, 'items/admin.html', context)
 
 def add_category(request):
     category = Category.objects.all()
@@ -49,9 +48,30 @@ def delete_cat(request, slug):
     cat = get_object_or_404(Category,slug=slug)
     cat.delete()
     return redirect('/admin/addCategory/')
+def update_brand(request, id):  
+    cate = Brand.objects.get(id=id)
+    if request.method == 'POST':
+        form = NewBrand(request.POST, request.FILES,instance=cate)
+        if form.is_valid():
+            form.save()
+            return redirect('add_brand')
+    else:
+        form = NewBrand(instance=cate)
+    category = Brand.objects.all()
+    context = {
+        # "form_category":form,
+        'add_brand': form,
+        "categories": category
+    }
+    return render(request, 'items/add_brand.html', context)
+def delete_brand(request, id):
+    cat = get_object_or_404(Brand,id=id)
+    cat.delete()
+    return redirect('add_brand')
 
 
 def add_brand(request):
+    
     if request.method == 'POST':        
         form = NewBrand(request.POST, request.FILES)
         if form.is_valid():
@@ -59,7 +79,7 @@ def add_brand(request):
             return redirect('/admin/addProduct/')
     else:
         form = NewBrand()
-    context = {'add_brand': form}
+    context = {'add_brand': form,"categories": Brand.objects.all()}
     return render(request, 'items/add_brand.html', context)
 
 def add_items(request):
@@ -96,26 +116,29 @@ def delete_items(request, slug):
     return redirect('/home/')
     
 
+from .forms import AddVariationForm, AddVariationOptionForm
 
 def add_variation(request):
     if request.method == 'POST':
-        form_variation = forms.AddVariation(request.POST)
+        # form_variation = forms.AddVariation(request.POST)
+        form_variation = AddVariationForm(request.POST)
         if form_variation.is_valid():
             form_variation.save()
             return redirect('/admin/addVariationOption/')
     else:
-        form_variation = forms.AddVariation()
+        form_variation = AddVariationForm()
     context = {"form_variation": form_variation}
     return render(request, 'items/add_variation.html', context)
 
 def add_variationOptions(request):
     if request.method == 'POST':
-        form_variation_option = forms.AddVariationOption(request.POST)
+        # form_variation_option = forms.AddVariationOption(request.POST)
+        form_variation_option = AddVariationOptionForm(request.POST)
         if form_variation_option.is_valid():
             form_variation_option.save()
             return redirect('/home/')
     else:
-        form_variation_option = forms.AddVariationOption()
+        form_variation_option = AddVariationOptionForm()
     context = {"form_variation_option": form_variation_option}
     return render(request, 'items/add_variationOptions.html', context)
 

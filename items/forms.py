@@ -45,7 +45,7 @@ class NewProduct(forms.ModelForm):
 #         fields = ('rate', 'comment')
 
 
-class AddVariation(forms.ModelForm):
+class AddVariationForm(forms.ModelForm):
     class Meta:
         model = Variation
         fields = "__all__"
@@ -56,7 +56,7 @@ class AddVariation(forms.ModelForm):
     
     
 
-class AddVariationOption(forms.ModelForm):
+class AddVariationOptionForm(forms.ModelForm):
     class Meta:
         model = VariationOption
         fields = "__all__"

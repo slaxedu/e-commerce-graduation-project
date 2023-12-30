@@ -19,12 +19,12 @@ from django.urls import path, include
 from django.conf.urls import handler404
 handler404 = 'recommention_system.views.not_found'
 urlpatterns = [
-    path('django-admin/', admin.site.urls),
+    # path('django-admin/', admin.site.urls),
     path('admin/', include('items.urls')),
     path('', include('view_product.urls')),
     path('account/', include('account.urls')),
     path('cart/', include('cart_shop.urls')),
-    path('web/', include('web_script.urls')),
+    # path('web/', include('web_script.urls')),
     path('' , include('recommention_system.urls')),
 ]
 from django.conf import settings

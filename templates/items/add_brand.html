@@ -17,8 +17,23 @@
 {% include "items/nav.html" %} 
 
 
+
+<div style="margin: 252px 84px 15px 26px;position: absolute;     overflow-y: scroll;max-height: 500px;" class='visb'>
+    {% for cat in categories%}
+    
+    <div style="margin-bottom:20px">{{cat}}                    
+        {% if user.is_superuser %}
+    
+        <a href="{%url 'edit_brand' cat.id %}"><button type="button" class="btn btn-primary" style="    background: none;color: blue;border: none;text-decoration-line: underline;">Update</button></a>
+        <a href="{%url 'delete_brand' cat.id %}"><button type="button" class="btn btn-danger" style="    background: none;color:red;border: none;text-decoration-line: underline;">Delete</button></a>
+    
+        {%endif %}</div>
+    {%endfor%}
+    </div>
+
+
 <div class="content-admin-form" style='margin-top:140px'>
-    <h1>Add Brand</h1>
+<h1>Add Brand</h1>
     <form method='POST' action='.' enctype='multipart/form-data'>
         {% csrf_token%}
         <div class="descripe-product">
