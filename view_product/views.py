@@ -184,10 +184,10 @@ def product_items(request, slug):
 
 
 
-    if request.user.is_authenticated:
-        click = ClickCount.objects.get_or_create(product=product_item, user=request.user)
-    else:
-        click = ClickCount.objects.get_or_create(product=product_item)
+    # if request.user.is_authenticated:
+    #     click = ClickCount.objects.get_or_create(product=product_item, user=request.user)
+    # else:
+    click = ClickCount.objects.get_or_create(product=product_item)
     
     if click:
         click = ClickCount.objects.filter(product=product_item)
