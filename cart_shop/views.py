@@ -82,7 +82,7 @@ def cart(request):
                 print("email Not Found")
             items_cart.delete()
             time.sleep(1)
-            return redirect('home')
+            return redirect('main')
     last_order = Order.objects.filter(user=request.user).order_by('-id').first()
     order_items = ''
     if last_order:
@@ -100,10 +100,11 @@ def cart(request):
 
 @login_required(login_url='/account/register/')
 def cart_detele(request, slug):
+    
     try:
         item_cart = Cart.objects.filter(user=request.user).filter(product__slug=slug)
-        time.sleep(5)
         item_cart.delete()
+        time.sleep(6)
     except:
         print('no items')
     return redirect('cart')

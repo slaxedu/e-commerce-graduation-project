@@ -10,44 +10,75 @@ import requests
 from bs4 import BeautifulSoup
 import csv
 import string
-# details = """Display Size	6.1 inches
-# Display Resolution	828x1792
-# Touch Screen	Yes
-# Processor CPU	Hexa-core
-# INTERNAL STORAGE	128 GB
-# Memory RAM	4 GB
-# Operating System	IOS
-# Operating System Version	IOS 13
-# OPERATING SYSTEM	iOS
-# Main Camera	12 MP + 12 MP
-# Selfie Camera	12 MP
-# Video Recording Type	2160p@24/30/60fps
-# Network Type	2G, 3G, 4G
-# SIM Card	Single SIM
-# SIM Card	Single SIM
-# SIM Type	Nano SIM
-# Product Color	Black
-# WiFi	Yes
-# Bluetooth	Yes
-# Battery capacity	3110 mAh battery
-# Weight	150 g"""
+details = """Display Size	6.1 inches
+Display Resolution	828x1792
+Touch Screen	Yes
+Processor CPU	Hexa-core
+INTERNAL STORAGE	128 GB
+Memory RAM	4 GB
+Operating System	IOS
+Operating System Version	IOS 13
+OPERATING SYSTEM	iOS
+Main Camera	12 MP + 12 MP
+Selfie Camera	12 MP
+Video Recording Type	2160p@24/30/60fps
+Network Type	2G, 3G, 4G
+SIM Card	Single SIM
+SIM Card	Single SIM
+SIM Type	Nano SIM
+Product Color	Black
+WiFi	Yes
+Bluetooth	Yes
+Battery capacity	3110 mAh battery
+Weight	150 g"""
 
-details = """Laptop Category	Gaming
-Processor	AMD
-Graphics Card	NVIDIA® GeForce RTX
-RAM	32GB
-Hard Disk Capacity	1TB
-Display Size	16 inches
-Operating System	Windows
-"""
+# details = """Laptop Category	Gaming
+# Processor	AMD
+# Graphics Card	NVIDIA® GeForce RTX
+# RAM	32GB
+# Hard Disk Capacity	1TB
+# Display Size	16 inches
+# Operating System	Windows
+# """
 
 
 
 def web(request):
 
-    # cat = Category.objects.get(category_name='Monitors')
-    # cat = Category.objects.all()
-    # br = Brand.objects.get(name='Apple')
+    # url = "https://dream2000.com/en/mobiles.html?product_list_limit=100"
+    # response = requests.get(url)
+
+    # if response.status_code == 200:
+    #     soup = BeautifulSoup(response.content, 'html.parser')
+
+    #     products = soup.find_all("div", {'class': 'product-item-info'})
+
+    #     for index, product in enumerate(products, start=1):
+    #         try:
+    #             product_title = product.find('a', {'class': 'product-item-link'}).text.strip()
+    #             product_price = product.find('span', {'class': 'special-price'}).find('span', {'class': 'price'}).text.strip()
+
+    #             # Check if 'img' tag has 'src' attribute
+    #             product_image_tag = product.find('img', {'class': 'product-image-photo'})
+    #             product_image = product_image_tag['data-src'] if product_image_tag and 'src' in product_image_tag.attrs else 'Image not found'
+    #             print(product_image_tag['data-src'])
+    #             print(f"Product {index}:")
+    #             print(f"Title: {product_title}")
+    #             print(f"Price: {product_price}")
+    #             print(f"Image: {product_image}")
+    #             print("-" * 30)
+    #         except Exception as e:
+    #             print(f"Error processing product {index}: {e}")
+
+    # else:
+    #     print(f"Failed to retrieve the webpage. Status code: {response.status_code}")
+
+
+
+    # cat = Category.objects.get(category_name='Mobiles & Tablets')
+    # # cat = Category.objects.all()
+    # # br = Brand.objects.get(name='Apple')
+    # br = Brand.objects.all()
 
     # print(br)
     # product = Product.objects.all().order_by('id')
@@ -57,50 +88,165 @@ def web(request):
     #     print(j)
     #     j+=1
 
-    # page = requests.get("https://dream2000.com/en/laptop-notebook/monitors.html")
+    # page = requests.get("https://dream2000.com/en/mobiles.html?_=1704508154879&p=3&product_list_limit=100")
+    # # page = requests.get("https://dream2000.com/en/mobiles.html?product_list_limit=100")
+    # # page = requests.get("https://dream2000.com/en/mobiles.html?_=1704506553979&p=2&product_list_limit=100")
+    # page = requests.get("https://dream2000.com/en/tablets.html?product_list_limit=100")
     
-    # def main(page):
+    # def main(page, k):
+        
+    #     print("main####################")
     #     scr = page.content
     #     soup = BeautifulSoup(scr, 'lxml')
     #     product_details = []
-    #     product = soup.find_all("div", {'class': 'product-item-info'})
+    #     products = soup.find_all("div", {'class': 'product-item-info'})
+    #     # print(products)
     #     dict_list  = []
+    #     # print(product)
+        
     #     def get_product_info(product, k):
     #         product_title = product.find('a', {'class': 'product-item-link'}).text.strip()
-    #         product_photo = product.find('img', {'class': 'product-image-photo'})['src']
+    #         product_photo = product.find('img', {'class': 'product-image-photo'})['data-src']
     #         product_price = product.find('span', {'class': 'special-price'}).find('span', {'class': 'price'}).text.strip()
-    #         # print(product_title)
-    #         # print(product_photo)
-    #         # print(product_price)
+    #         print("################################################")
+    #         print(product_title)
+    #         print(product_photo)
+    #         print(product_price)
+    #         print("################################################")
     #         out = re.findall(r'\d+\.\d+', product_price)
     #         float_value = float(out[0])
     #         dict_list.append({'name':product_title, 'image':product_photo, 'price': product_price})
 
     #         print(f"TSSSSSSSSSSSSSS {product_photo}")
     #         img_data = requests.get(f"{product_photo}").content
-    #         with open(f"B:\\BOOK\Graduation Project\\New folder (2)\media\image\product\\Laptops\\monitors{k}.jpg", 'wb') as handler:
+    #         with open(f"B:\\BOOK\Graduation Project\\New folder (2)\media\image\product\\another\\phone{k}.jpg", 'wb') as handler:
     #             handler.write(img_data)
     #             k+=1
     #         prod = Product.objects.create(
     #             name= product_title,
     #             description= details,
     #             # image = 'https://dream2000.com/media/catalog/product/cache/f0c876fc5fd423dc009b2416a0e65966/s/a/samsung-a53-5g-_8_128_-awesome-black-1.jpg',
-    #             image = f'image\product\\Laptops\\monitors{k}.jpg',
+    #             image = f'image\product\\another\\phone{k}.jpg',
     #             category_id =  cat, 
     #             price = float_value,
     #             quantity_in_stock = 100,
     #             # brand_id = br,
     #             slug = slugify(product_title)
     #         )
+    #     print("main####################")
+    #     for i in products:
+    #         k +=1
+    #         print("******************&&&&&&&&&&&&&")
+    #         print(k)
+    #         print("******************&&&&&&&&&&&&&")
+    #         try:
+    #             get_product_info(i, k)
+    #         except:
+    #             continue
+    # k = 400
+    # main(page, k)
+    # product = Product.objects.all()
+    # for i in product:
+    #     br = i.name.split(' ')[0]
+    #     brand, created = Brand.objects.get_or_create(name=br)
+    #     if not i.brand_id:
+    #         test_product = Product.objects.get(slug=i.slug)
+    #         if created:
+    #             test_product.brand_id = brand.id
+    #     if not i.brand_id:
+    #         try:
+    #             brad = Brand.objects.get(name=br)
+    #             prod = Product.objects.get(name=i.name)
+    #             prod.brand_id = brad
+    #             prod.save()
+    #             print("Successed")
+    #         except:
+    #             print("Not Found this instance")
+
+                
+    # cat = Category.objects.get(category_name='Mobiles & Tablets')
+    # # cat = Category.objects.all()
+    # # br = Brand.objects.get(name='Apple')
+    # br = Brand.objects.all()
+
+    # print(br)
+    # product = Product.objects.all().order_by('id')
+    # j = 1
+    # for i in product:
+    #     Product.objects.filter(id=i.id).update(count=j)
+    #     print(j)
+    #     j+=1
+
+    # page = requests.get("https://dream2000.com/en/mobiles.html?product_list_limit=100")
+    
+    # def main(page):
+    #     print("main####################")
+    #     scr = page.content
+    #     soup = BeautifulSoup(scr, 'lxml')
+    #     product_details = []
+    #     products = soup.find_all("div", {'class': 'product-item-info'})
+    #     print(products)
+    #     dict_list  = []
+    #     # print(product)
+    
+    #     def get_product_info(product, k):
+    #         product_title = product.find('a', {'class': 'product-item-link'}).text.strip()
+    #         product_photo = product.find('img', {'class': 'product-image-photo'})['src']
+    #         product_price = product.find('span', {'class': 'special-price'}).find('span', {'class': 'price'}).text.strip()
+    #         print(product_title)
+    #         print(product_photo)
+    #         print(product_price)
+    #         out = re.findall(r'\d+\.\d+', product_price)
+    #         float_value = float(out[0])
+    #         dict_list.append({'name':product_title, 'image':product_photo, 'price': product_price})
+
+    #         print(f"TSSSSSSSSSSSSSS {product_photo}")
+    #         img_data = requests.get(f"{product_photo}").content
+    #         with open(f"B:\\BOOK\Graduation Project\\New folder (2)\media\image\product\\another\\phone{k}.jpg", 'wb') as handler:
+    #             handler.write(img_data)
+    #             k+=1
+    #         prod = Product.objects.create(
+    #             name= product_title,
+    #             description= details,
+    #             # image = 'https://dream2000.com/media/catalog/product/cache/f0c876fc5fd423dc009b2416a0e65966/s/a/samsung-a53-5g-_8_128_-awesome-black-1.jpg',
+    #             image = f'image\product\\another\\phone{k}.jpg',
+    #             category_id =  cat, 
+    #             price = float_value,
+    #             quantity_in_stock = 100,
+    #             # brand_id = br,
+    #             slug = slugify(product_title)
+    #         )
+    #     print("main####################")
     #     k = 1
-        
-    #     for i in product:
+    #     for i in products:
+    #         print("test 1")
+    #         print(i)
     #         try:
     #             get_product_info(i, k)
     #         except:
     #             continue
     #         k +=1
-    
+    # # main(page)
+    # product = Product.objects.filter(category_id_id=162)
+    # print(product)
+    # for i in product:
+        
+    #     br = i.name.split(' ')[0]
+    #     print(br)
+    #     brand, created = Brand.objects.get_or_create(name=br)
+    #     if not i.brand_id:
+    #         test_product = Product.objects.get(slug=i.slug)
+    #         if created:
+    #             test_product.brand_id = brand.id
+    #     if not i.brand_id:
+    #         try:
+    #             brad = Brand.objects.get(name=br)
+    #             prod = Product.objects.get(name=i.name)
+    #             prod.brand_id = brad
+    #             prod.save()
+    #             print("Successed")
+    #         except:
+    #             print("Not Found this instance")
 #     user_cookie = request.COOKIES.get('csrftoken','')
 #     user_session_id = request.COOKIES.get('sessionid','')
 #     user_os = request.META['OS']
@@ -134,22 +280,6 @@ def web(request):
     # return render(request, 'temp.html')
     # product = Product.objects.all()
 
-    # for i in product:
-    #     br = i.name.split(' ')[0]
-    #     # brand, created = Brand.objects.get_or_create(name=br)
-    #     # if not i.brand_id:
-    #     #     test_product = Product.objects.get(slug=i.slug)
-    #     #     if created:
-    #     #         test_product.brand_id = brand.id
-    #     if not i.brand_id:
-    #         try:
-    #             brad = Brand.objects.get(name=br)
-    #             prod = Product.objects.get(name=i.name)
-    #             prod.brand_id = brad
-    #             prod.save()
-    #             print("Successed")
-    #         except:
-    #             print("Not Found this instance")
     return HttpResponse('nothing')
 
 
@@ -295,7 +425,7 @@ def review_insert(request):
         return dataset
 
     # Set the number of samples you want in your dataset
-    num_samples = 10
+    num_samples = 10000
 
     # Generate the dataset
     electronic_product_dataset = generate_electronic_product_dataset(num_samples)
@@ -313,7 +443,7 @@ def review_insert(request):
             )
             review = Review.objects.create(
                         user_id = random.randint(203735, 203933),
-                        product_id = random.randint(48,834),
+                        product_id = random.randint(388,1626),
                         rate  = i['Rating'],
                         comment = com,
                     )

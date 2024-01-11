@@ -1,0 +1,75 @@
+{% extends "base.html" %}
+
+
+{%block title%}Conter Panel|Order{%endblock%}
+
+{%block content%}
+{% include "items/nav.html" %} 
+
+<style>
+  table {
+    font-family: arial, sans-serif;
+    border-collapse: collapse;
+    width: 100%;
+  }
+  
+  td, th {
+    border: 1px solid #dddddd;
+    text-align: left;
+    padding: 8px;
+  }
+  
+  tr:nth-child(even) {
+    background-color: #dddddd !important;
+  }
+  tfoot tr th {
+    background: red !important;
+  }
+  </style>
+<div style="margin-top:70px;">
+<div class="container mt-5" style="margin: 252px 84px 15px 26px;position: absolute;max-height: 650px;" class='visb'>
+    <h2 class="mb-4">Order List (Admin View)</h2>
+  
+    {%for order in orders%}
+    <table class="table">
+      <thead>
+        <tr>
+          <th>Product</th>
+          <th>Quantity</th>
+          <th>Price</th>
+        </tr>
+      </thead>
+      
+    <tbody>
+      {% for item in order.items.all %}
+      <tr>
+        <td>{{ item.product.name }}</td> 
+        <td>{{ item.quantity }}</td> 
+        <td>{{item.product.price}} EGP</td> 
+      </tr>
+      {% endfor %}
+    </tbody>
+    <tfoot style="background:red">
+        <tr>
+          <td style="background: darkblue;
+          color: white;">Order ID: {{order.id}}</td>
+          <td style="background: darkblue;
+          color: white;">User Name: {{order.user.username}}</td>
+          <td style="background: darkblue;
+          color: white;">Total Price: {{order.total_price}}</td>
+          <td style="background: darkblue;
+          color: white;">Email Address: {{order.user.email}}</td>
+          <td style="background: darkblue;
+          color: white;">Phone: {{order.user.phone_number}}</td>
+          <td style="background: darkblue;
+          color: white;">Phone: {{order.shoping_address.address}}</td>
+        </tr>
+      
+    </tfoot>
+    </table>
+    {%endfor%}
+  </div>
+
+</div>
+  
+{%endblock%}

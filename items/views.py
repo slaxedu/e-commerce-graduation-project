@@ -46,8 +46,14 @@ def update_cat(request, slug):
     return render(request, 'items/add_category.html', context)
 def delete_cat(request, slug):
     cat = get_object_or_404(Category,slug=slug)
-    cat.delete()
-    return redirect('/admin/addCategory/')
+    if request.method == 'POST':
+        if request.POST['delete'] == 'Yes':
+            if cat.product.exists():
+                print("Your Object Can't Delete")
+            else:
+                cat.delete()
+        return redirect('/admin/addCategory')
+    return render(request, 'items/delete.html')
 def update_brand(request, id):  
     cate = Brand.objects.get(id=id)
     if request.method == 'POST':
@@ -66,8 +72,14 @@ def update_brand(request, id):
     return render(request, 'items/add_brand.html', context)
 def delete_brand(request, id):
     cat = get_object_or_404(Brand,id=id)
-    cat.delete()
-    return redirect('add_brand')
+    if request.method == 'POST':
+        if request.POST['delete'] == 'Yes':
+            if cat.product.exists():
+                print("You Can't Delete ")
+            else:
+                cat.delete()
+        return redirect('add_brand')
+    return render(request, 'items/delete.html')
 
 
 def add_brand(request):
@@ -82,14 +94,16 @@ def add_brand(request):
     context = {'add_brand': form,"categories": Brand.objects.all()}
     return render(request, 'items/add_brand.html', context)
 
+
 def add_items(request):
     if request.method == 'POST':        
         form = NewProduct(request.POST, request.FILES)
         if form.is_valid():
             form = form.save(commit=False)
             form.slug = slugify(request.POST['name'])
+            form.count = Product.objects.count()+1
             form.save()
-            return redirect('/admin/addVariation/')
+            return redirect('/admin/')
     else:
         form = NewProduct()
     context = {'add_product': form}
@@ -103,6 +117,7 @@ def update_items(request ,slug):
             form.save()
             form = form.save(commit=False)
             form.slug = slugify(request.POST['name'])
+            
             form.save()
             return redirect('product_items', slug=form.slug)
     else:
@@ -143,4 +158,16 @@ def add_variationOptions(request):
     return render(request, 'items/add_variationOptions.html', context)
 
 
+from cart_shop.models import Order, OrderItems
+from django.db.models import Prefetch
 
+def order_view(request):
+
+    orders_with_items_and_user = Order.objects.order_by('-order_date').prefetch_related(
+    'items__product',  # Include product information for each item
+    'user'  # Include the user information
+    )
+
+    context = {'orders': orders_with_items_and_user}
+    
+    return render(request, 'items/order_view.html', context)

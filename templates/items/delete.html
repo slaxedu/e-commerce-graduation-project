@@ -1,0 +1,41 @@
+{% extends "base.html" %}
+
+
+{%block title%}Conter Panel{%endblock%}
+
+{%block content%}
+{% include "items/nav.html" %} 
+
+
+
+<div style="    width: 1200px;
+margin: 110px auto;" class="wrapper">
+
+    <!-- Content Wrapper. Contains page content -->
+    <div   class="content-wrapper">
+      <!-- Content Header (Page header) -->
+  <div  class="card card-danger">
+      <div class="card-header">
+        <h3 class="card-title">Delete </h3>
+      </div>
+      <!-- /.card-header -->
+      <!-- form start -->
+      <form  method="POST" enctype="multipart/form-data">
+        {% csrf_token %}
+        <div class="row">
+          
+       <p class="p-1" style="    margin: 20px 18px;font-size: larger;font-weight: bold;">Are You Want Delete?</p>
+   
+        </div>
+        <!-- /.card-body -->
+  
+        <div class="card-footer">
+            
+            <input type="submit" value="Yes" name="delete" class="btn btn-danger">
+            <input type="submit" value="No" name="delete" class="btn btn-success">
+        </div>
+      </form>
+    </div>
+  </div>
+  </div>
+    {%endblock%}

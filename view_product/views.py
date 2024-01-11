@@ -15,7 +15,7 @@ def home(request):
     if request.user:
         number = Cart.objects.all().filter(user=request.user.id).count()
     product = Product.objects.all()
-    category = Category.objects.all()
+    category = Category.objects.all().order_by('id')
     # product = Product.objects.all()
     prod_min = Product.objects.order_by('price').first()
     prod_max = Product.objects.order_by('price').last()
@@ -58,7 +58,7 @@ def categ_home(request, slug):
     number = 0
     if request.user:
         number = Cart.objects.all().filter(user=request.user.id).count()
-    category = Category.objects.all()
+    category = Category.objects.all().order_by('id')
     product=Product.objects.all()
     try:
         cate = Category.objects.get(slug=slug)
@@ -193,10 +193,14 @@ def product_items(request, slug):
         click = ClickCount.objects.filter(product=product_item)
         
         for x in click:
-            print(x)
+            print(x.count)
+            print("@@@@@@@@@@@@@@@@@@@!!!!!!!!!!!!!!")
             click.update(count=x.count+1)
+            
 
-
+    for h in click:
+        print(h.count)
+        print("^^^^^^^^^^^^^^^^^^^")
 
     context = {
         "comments": comment[0:3],

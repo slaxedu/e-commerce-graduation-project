@@ -90,8 +90,8 @@
                 </div>
                 {%endfor%}
 
-                {% comment %} {% if product.number > 1 %} {% endcomment %}
                 <div aria-label="..." style='position: relative; margin-left:501px; margin-bottom:60px;'>
+            {% if product.paginator.num_pages > 1 %}
                 <ul class="pagination">
                  {%if product.has_previous%}
                   <li class="page-item ">
@@ -111,10 +111,11 @@
                     <a class="page-link" href="{%if slug%}{%url 'category_home' slug %}{%else%}{%url 'home' %}{%endif%}?{%if cat_id%}category={{cat_id}}&{%endif%}page={{product.next_page_number}}">Next</a>
                 </li>
                 
-                {% comment %} {%endif%} {% endcomment %}
-                </ul>
-                </div>
                 {%endif%}
+                </ul>
+                {%endif%}
+                </div>
+                
             </div>
             
 

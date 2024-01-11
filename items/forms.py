@@ -26,6 +26,7 @@ class NewProduct(forms.ModelForm):
         fields = "__all__"
         # fields = ('name', 'description', 'price',)
     slug = forms.CharField(required=False)
+    count = forms.CharField(required=False)
     name=forms.CharField(widget=forms.TextInput(attrs={
     'placeholder': 'Product Name',
     'class': 'form-control first-input',

@@ -13,7 +13,7 @@ from .forms import LoginForm, RegisterForm
 class LoginView(auth_views.LoginView):
     form_class = LoginForm
     template_name = 'account/login.html'
-    success_url = reverse_lazy('home')
+    success_url = reverse_lazy('main')
     # LOGIN_REDIRECT_URL = '/home/'
     # def post(self, request):
     #     return redirect('home')
@@ -36,17 +36,17 @@ def register(request):
 # @login_required('register')
 def log_out(request):
     logout(request)
-    return redirect('home')
+    return redirect('main')
 
 
 def user_update(request, pk):
-    if request.method == 'POST':
-        reg = RegisterForm(request.POST, instance=request.user)
-        if reg.is_valid():
-            reg.save()
-            return redirect('home')
-    else:
-        reg = RegisterForm(instance=request.user)
-        context = {"form":reg}
+    # if request.method == 'POST':
+    #     reg = RegisterForm(request.POST, instance=request.user)
+    #     if reg.is_valid():
+    #         reg.save()
+    #         return redirect('home')
+    # else:
+    reg = RegisterForm(instance=request.user)
+    context = {"form":reg}
     return render(request, 'account/register.html', context)
 

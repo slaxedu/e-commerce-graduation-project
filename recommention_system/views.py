@@ -61,13 +61,16 @@ def main(request):
                 product_name = match.group(1)
                 if product_name not in list_set:
                     list_set.append(product_name)
-                    recently_product_real.append(Product.objects.get(slug=product_name))
+                    try:
+                        recently_product_real.append(Product.objects.get(slug=product_name))
+                    except:
+                        continue
     else:
         recently_product_real = []
     number = 0
     if request.user:
         number = Cart.objects.all().filter(user=request.user.id).count()
-    categories = Category.objects.filter(image__isnull=False)
+    categories = Category.objects.filter(image__isnull=False).exclude(image__exact='')
     brand = Brand.objects.filter(image__isnull=False).exclude(image__exact='')
 
 
@@ -114,18 +117,8 @@ def main(request):
     # Correlation Matrix
     correlation_matrix = np.corrcoef(decomposed_matrix)
 
-    recently_activate = UserInfo.objects.all()
     recently_product = []
     list_set = []
-    for i in recently_activate:
-        url = i.referrer
-        pattern = r'/product/(.+)/$'
-        match = re.search(pattern, url)
-        if match:
-            product_name = match.group(1)
-            if product_name not in list_set:
-                list_set.append(product_name)
-                recently_product.append(Product.objects.get(slug=product_name))
     
     recommend_product = []
     number_recommend = []
@@ -146,11 +139,10 @@ def main(request):
     for i in set(number_recommend):
         recommend_product.append(Product.objects.get(id=i))
     
-    query = ClickCount.objects.all().order_by('-count')
-    trending = []
-    for i in set(query):
-        trending.append(i.product)
-
+    trending = ClickCount.objects.all().order_by('-count')
+    
+    if not recommend_product:
+        recommend_product = Product.objects.all().order_by('?')
     context={
     "trending": trending[0:10],
     "recommend": recommend_product[0:10],

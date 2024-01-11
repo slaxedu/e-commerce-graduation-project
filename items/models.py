@@ -19,8 +19,8 @@ class Brand(models.Model):
         return self.name
 
 class Product(models.Model):
-    category_id = models.ForeignKey(Category, on_delete=models.CASCADE)
-    brand_id = models.ForeignKey(Brand, on_delete=models.CASCADE, null=True, blank=True )
+    category_id = models.ForeignKey(Category, on_delete=models.CASCADE,  related_name='product')
+    brand_id = models.ForeignKey(Brand, on_delete=models.CASCADE, null=True, blank=True,  related_name='product' )
     name = models.CharField(max_length=255, unique=True)
     description = models.TextField(max_length=4000, null=True, blank=True)
     image = models.ImageField(upload_to='image/product', blank=True, null=True)

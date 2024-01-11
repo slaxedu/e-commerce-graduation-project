@@ -40,7 +40,7 @@
                     </div>
                 </form>
                 <button class="remove-btn" style="width: 100px;padding: 0px;margin: 0px auto 20px">
-                    <a href="{% url 'cart_detele'  item.product.slug  %}"  style="padding: 0px;color:white;background: red;">
+                    <a  id="cartLink" href="{% url 'cart_detele'  item.product.slug  %}"  style="padding: 0px;color:white;background: red;">
                         Remove
                     </a>
                 </button>
@@ -267,6 +267,7 @@ document.addEventListener('DOMContentLoaded', function() {
     removeButtons.forEach(function (button) {
         button.addEventListener('click', function () {
             const card = button.closest('.card-content'); 
+            
             if (card) {
                 Swal.fire({
                     title: 'Are you sure to delete this product?',
@@ -277,6 +278,10 @@ document.addEventListener('DOMContentLoaded', function() {
                 }).then((result) => {
                     if (result.isConfirmed) {
                         card.remove();
+                        document.addEventListener('DOMContentLoaded', function() {
+                            var cartLink = document.getElementById('cartLink');
+                            cartLink.href += '/?value=yes';
+                        });
                     } 
                 });
             }
