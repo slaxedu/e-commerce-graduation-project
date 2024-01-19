@@ -1,0 +1,128 @@
+/* Start global attribute*/
+* {
+    box-sizing: border-box;
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+/* End global attribute */
+/* Start Description */
+.description {
+    padding: 20px;
+    margin: 100px auto 30px;
+    width: 900px;
+    border-radius: 20px;
+    border: 2px solid #b39a7399;
+}
+.description .content {
+    display: flex;
+    justify-content: space-between;
+}
+.description .content .left-side {
+    height: 400px;
+    width: 400px;
+    background-color: white;
+    margin-right: 5px;
+    border-radius: 20px;
+}
+.description .content .left-side .cover-img{
+    width: 300px;
+    height: 300px;
+    background-color: #f6f6f6;
+    margin: 50px 50px;
+    border-radius: 10px;
+}
+.description .content .left-side .cover-img img{
+    width: 200px;
+    height: 200px;
+    margin: 50px 50px;
+    border-radius: 10px;
+    transition: 0.7s;
+}
+.description .content .left-side .cover-img img:hover{
+    transform: scale(1.5);
+}
+.description .content .right-side {
+    height: 400px;
+    width: 400px;
+    background-color: white;
+    padding: 20px;
+    border-radius: 20px;
+}
+/* Start Add Cooment*/
+.container{
+    padding: 20px;
+    margin: 0 auto;
+    width: 900px;
+}
+.container form{
+    display: flex;
+    flex-direction: column;
+    position: relative;
+    margin-bottom: 60px;
+}
+.container .content form {
+    flex-basis: 100%;
+    margin-bottom: 100px;
+}
+/* End Add Cooment */
+/* Start Rating */
+.rating {
+    font-size: 24px;
+    cursor: pointer;
+    position: absolute;
+    bottom: 10px;
+    left: 40%;
+}
+.star {
+    color: #ccc;
+    margin-right: 5px;
+}
+.star:hover,
+.star.active {
+    color: #ffcc00;
+}
+/* End Rating */
+/* Start Related Products */
+.base-content {
+    padding: 20px;
+    margin: 0 auto 30px;
+    width: 600px;
+}
+.base-content .content-related {
+    display: flex;
+    justify-content: space-between;
+}
+.base-content h4{
+    width: 200px;
+    text-align: center;
+    padding: 10px;
+    background-color: red;
+    color: white;
+    margin: 60px auto;
+    border-radius: 8px;
+    cursor: default;
+}
+.base-content .content-related .sec-related{
+    padding: 5px;
+    text-decoration: none;
+}
+.base-content .content-related .sec-related div img{
+    width: 100px;
+    margin-bottom: 10px;
+    border-radius: 8px;
+}
+.base-content .content-related .sec-related div p:first-of-type{
+    margin-bottom: 5px;
+    color: black;
+}
+.base-content .content-related .sec-related div p:last-of-type{
+    color: red;
+}
+/* End Related Products */

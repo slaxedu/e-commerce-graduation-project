@@ -31,11 +31,10 @@ def home(request):
     cat_id = cat_return(categ)
     if query:
         product = product.filter(Q(name__icontains=query)|Q(description__icontains=query))
-        # product = product.filter(name__search=query)
-        # product =  product.annotate(rank=SearchRank(vector, search_query)).filter(rank__gte=.3).order_by('-rank')
+
     if categ:
         product = product.filter(category_id_id = categ)
-        # product_p = p.filter(category_id_id = categ)
+
         if br:
             product= product.filter(category_id_id = categ).filter(brand_id_id = br)
     if br:
@@ -68,24 +67,6 @@ def categ_home(request, slug):
         cate.slug = ''
     query = request.GET.get('q', '')
     br = request.GET.get('br', 0)
-    
-    # if request.method == 'GET':
-    #     min_price = request.GET.get('min', '')
-    #     max_price = request.GET.get('max', '')
-    #     try:
-    #         min_price = int(min_price)
-    #         max_price = int(max_price)
-    #         product  = Product.objects.filter(price=min_price) and Product.objects.filter(price=int(max_price))
-            
-            
-    #     except:
-    #         # product  = Product.objects.filter(price=10000) and Product.objects.filter(price=10000)
-    #         print('nothing')
-    #     print(f'######################### min_price {min_price}')
-    #     print(f'######################### max_price {max_price}')
-        
-    
-
     if query:
         product = product.filter(Q(name__icontains=query)|Q(description__icontains=query))
     if br:

@@ -24,7 +24,7 @@ urlpatterns = [
     path('', include('view_product.urls')),
     path('account/', include('account.urls')),
     path('cart/', include('cart_shop.urls')),
-    path('web/', include('web_script.urls')),
+    # path('web/', include('web_script.urls')),
     path('' , include('recommention_system.urls')),
 ]
 from django.conf import settings

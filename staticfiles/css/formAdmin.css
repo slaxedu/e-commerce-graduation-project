@@ -1,0 +1,69 @@
+/* Start global attribute*/
+* {
+    box-sizing: border-box;
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+html {
+    scroll-behavior: smooth;
+}
+body {
+    font-family: 'Cairo', sans-serif;
+    font-family: 'Roboto', sans-serif;
+}
+ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+.container {
+    padding-left: 15px;
+    padding-right: 15px;
+    margin-left: auto;
+    margin-right: auto;
+}
+/* Small */
+@media (min-width: 768px) {
+    .container {
+        width: 750px;
+    }
+}
+/* Medium */
+@media (min-width: 992px) {
+    .container {
+        width: 970px;
+    }
+}
+/* Large */
+@media (min-width: 1200px) {
+    .container {
+        width: 1170px;
+    }
+}
+/* End global attribute */
+/* Start Admin Form */
+.content-admin-form{
+    width: 400px;
+    margin: 50px auto 0;
+}
+.content-admin-form .add-products {
+    width: fit-content;
+    margin: 0 auto 50px;
+}
+.content-admin-form .descripe-product{
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+}
+.content-admin-form .descripe-product .first-input{
+    width: 290px;
+}
+.content-admin-form .descripe-product .last-input{
+    width: 100px;
+}
+.content-admin-form .center {
+    margin-left: 162px
+}
+/* End Admin Form */

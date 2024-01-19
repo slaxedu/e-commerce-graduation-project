@@ -91,194 +91,194 @@ def web(request):
     # page = requests.get("https://dream2000.com/en/mobiles.html?_=1704508154879&p=3&product_list_limit=100")
     # # page = requests.get("https://dream2000.com/en/mobiles.html?product_list_limit=100")
     # # page = requests.get("https://dream2000.com/en/mobiles.html?_=1704506553979&p=2&product_list_limit=100")
-    # page = requests.get("https://dream2000.com/en/tablets.html?product_list_limit=100")
+    page = requests.get("https://dream2000.com/en/tablets.html?product_list_limit=100")
     
-    # def main(page, k):
+    def main(page, k):
         
-    #     print("main####################")
-    #     scr = page.content
-    #     soup = BeautifulSoup(scr, 'lxml')
-    #     product_details = []
-    #     products = soup.find_all("div", {'class': 'product-item-info'})
-    #     # print(products)
-    #     dict_list  = []
-    #     # print(product)
+        print("main####################")
+        scr = page.content
+        soup = BeautifulSoup(scr, 'lxml')
+        product_details = []
+        products = soup.find_all("div", {'class': 'product-item-info'})
+        # print(products)
+        dict_list  = []
+        # print(product)
         
-    #     def get_product_info(product, k):
-    #         product_title = product.find('a', {'class': 'product-item-link'}).text.strip()
-    #         product_photo = product.find('img', {'class': 'product-image-photo'})['data-src']
-    #         product_price = product.find('span', {'class': 'special-price'}).find('span', {'class': 'price'}).text.strip()
-    #         print("################################################")
-    #         print(product_title)
-    #         print(product_photo)
-    #         print(product_price)
-    #         print("################################################")
-    #         out = re.findall(r'\d+\.\d+', product_price)
-    #         float_value = float(out[0])
-    #         dict_list.append({'name':product_title, 'image':product_photo, 'price': product_price})
+        def get_product_info(product, k):
+            product_title = product.find('a', {'class': 'product-item-link'}).text.strip()
+            product_photo = product.find('img', {'class': 'product-image-photo'})['data-src']
+            product_price = product.find('span', {'class': 'special-price'}).find('span', {'class': 'price'}).text.strip()
+            print("################################################")
+            print(product_title)
+            print(product_photo)
+            print(product_price)
+            print("################################################")
+            out = re.findall(r'\d+\.\d+', product_price)
+            float_value = float(out[0])
+            dict_list.append({'name':product_title, 'image':product_photo, 'price': product_price})
 
-    #         print(f"TSSSSSSSSSSSSSS {product_photo}")
-    #         img_data = requests.get(f"{product_photo}").content
-    #         with open(f"B:\\BOOK\Graduation Project\\New folder (2)\media\image\product\\another\\phone{k}.jpg", 'wb') as handler:
-    #             handler.write(img_data)
-    #             k+=1
-    #         prod = Product.objects.create(
-    #             name= product_title,
-    #             description= details,
-    #             # image = 'https://dream2000.com/media/catalog/product/cache/f0c876fc5fd423dc009b2416a0e65966/s/a/samsung-a53-5g-_8_128_-awesome-black-1.jpg',
-    #             image = f'image\product\\another\\phone{k}.jpg',
-    #             category_id =  cat, 
-    #             price = float_value,
-    #             quantity_in_stock = 100,
-    #             # brand_id = br,
-    #             slug = slugify(product_title)
-    #         )
-    #     print("main####################")
-    #     for i in products:
-    #         k +=1
-    #         print("******************&&&&&&&&&&&&&")
-    #         print(k)
-    #         print("******************&&&&&&&&&&&&&")
-    #         try:
-    #             get_product_info(i, k)
-    #         except:
-    #             continue
-    # k = 400
-    # main(page, k)
-    # product = Product.objects.all()
-    # for i in product:
-    #     br = i.name.split(' ')[0]
-    #     brand, created = Brand.objects.get_or_create(name=br)
-    #     if not i.brand_id:
-    #         test_product = Product.objects.get(slug=i.slug)
-    #         if created:
-    #             test_product.brand_id = brand.id
-    #     if not i.brand_id:
-    #         try:
-    #             brad = Brand.objects.get(name=br)
-    #             prod = Product.objects.get(name=i.name)
-    #             prod.brand_id = brad
-    #             prod.save()
-    #             print("Successed")
-    #         except:
-    #             print("Not Found this instance")
+            print(f"TSSSSSSSSSSSSSS {product_photo}")
+            img_data = requests.get(f"{product_photo}").content
+            with open(f"B:\\BOOK\Graduation Project\\New folder (2)\media\image\product\\another\\phone{k}.jpg", 'wb') as handler:
+                handler.write(img_data)
+                k+=1
+            prod = Product.objects.create(
+                name= product_title,
+                description= details,
+                # image = 'https://dream2000.com/media/catalog/product/cache/f0c876fc5fd423dc009b2416a0e65966/s/a/samsung-a53-5g-_8_128_-awesome-black-1.jpg',
+                image = f'image\product\\another\\phone{k}.jpg',
+                category_id =  cat, 
+                price = float_value,
+                quantity_in_stock = 100,
+                # brand_id = br,
+                slug = slugify(product_title)
+            )
+        print("main####################")
+        for i in products:
+            k +=1
+            print("******************&&&&&&&&&&&&&")
+            print(k)
+            print("******************&&&&&&&&&&&&&")
+            try:
+                get_product_info(i, k)
+            except:
+                continue
+    k = 400
+    main(page, k)
+    product = Product.objects.all()
+    for i in product:
+        br = i.name.split(' ')[0]
+        brand, created = Brand.objects.get_or_create(name=br)
+        if not i.brand_id:
+            test_product = Product.objects.get(slug=i.slug)
+            if created:
+                test_product.brand_id = brand.id
+        if not i.brand_id:
+            try:
+                brad = Brand.objects.get(name=br)
+                prod = Product.objects.get(name=i.name)
+                prod.brand_id = brad
+                prod.save()
+                print("Successed")
+            except:
+                print("Not Found this instance")
 
                 
-    # cat = Category.objects.get(category_name='Mobiles & Tablets')
-    # # cat = Category.objects.all()
-    # # br = Brand.objects.get(name='Apple')
-    # br = Brand.objects.all()
+    cat = Category.objects.get(category_name='Mobiles & Tablets')
+    # cat = Category.objects.all()
+    # br = Brand.objects.get(name='Apple')
+    br = Brand.objects.all()
 
-    # print(br)
-    # product = Product.objects.all().order_by('id')
-    # j = 1
-    # for i in product:
-    #     Product.objects.filter(id=i.id).update(count=j)
-    #     print(j)
-    #     j+=1
+    print(br)
+    product = Product.objects.all().order_by('id')
+    j = 1
+    for i in product:
+        Product.objects.filter(id=i.id).update(count=j)
+        print(j)
+        j+=1
 
-    # page = requests.get("https://dream2000.com/en/mobiles.html?product_list_limit=100")
+    page = requests.get("https://dream2000.com/en/mobiles.html?product_list_limit=100")
     
-    # def main(page):
-    #     print("main####################")
-    #     scr = page.content
-    #     soup = BeautifulSoup(scr, 'lxml')
-    #     product_details = []
-    #     products = soup.find_all("div", {'class': 'product-item-info'})
-    #     print(products)
-    #     dict_list  = []
-    #     # print(product)
+    def main(page):
+        print("main####################")
+        scr = page.content
+        soup = BeautifulSoup(scr, 'lxml')
+        product_details = []
+        products = soup.find_all("div", {'class': 'product-item-info'})
+        print(products)
+        dict_list  = []
+        # print(product)
     
-    #     def get_product_info(product, k):
-    #         product_title = product.find('a', {'class': 'product-item-link'}).text.strip()
-    #         product_photo = product.find('img', {'class': 'product-image-photo'})['src']
-    #         product_price = product.find('span', {'class': 'special-price'}).find('span', {'class': 'price'}).text.strip()
-    #         print(product_title)
-    #         print(product_photo)
-    #         print(product_price)
-    #         out = re.findall(r'\d+\.\d+', product_price)
-    #         float_value = float(out[0])
-    #         dict_list.append({'name':product_title, 'image':product_photo, 'price': product_price})
+        def get_product_info(product, k):
+            product_title = product.find('a', {'class': 'product-item-link'}).text.strip()
+            product_photo = product.find('img', {'class': 'product-image-photo'})['src']
+            product_price = product.find('span', {'class': 'special-price'}).find('span', {'class': 'price'}).text.strip()
+            print(product_title)
+            print(product_photo)
+            print(product_price)
+            out = re.findall(r'\d+\.\d+', product_price)
+            float_value = float(out[0])
+            dict_list.append({'name':product_title, 'image':product_photo, 'price': product_price})
 
-    #         print(f"TSSSSSSSSSSSSSS {product_photo}")
-    #         img_data = requests.get(f"{product_photo}").content
-    #         with open(f"B:\\BOOK\Graduation Project\\New folder (2)\media\image\product\\another\\phone{k}.jpg", 'wb') as handler:
-    #             handler.write(img_data)
-    #             k+=1
-    #         prod = Product.objects.create(
-    #             name= product_title,
-    #             description= details,
-    #             # image = 'https://dream2000.com/media/catalog/product/cache/f0c876fc5fd423dc009b2416a0e65966/s/a/samsung-a53-5g-_8_128_-awesome-black-1.jpg',
-    #             image = f'image\product\\another\\phone{k}.jpg',
-    #             category_id =  cat, 
-    #             price = float_value,
-    #             quantity_in_stock = 100,
-    #             # brand_id = br,
-    #             slug = slugify(product_title)
-    #         )
-    #     print("main####################")
-    #     k = 1
-    #     for i in products:
-    #         print("test 1")
-    #         print(i)
-    #         try:
-    #             get_product_info(i, k)
-    #         except:
-    #             continue
-    #         k +=1
-    # # main(page)
-    # product = Product.objects.filter(category_id_id=162)
-    # print(product)
-    # for i in product:
-        
-    #     br = i.name.split(' ')[0]
-    #     print(br)
-    #     brand, created = Brand.objects.get_or_create(name=br)
-    #     if not i.brand_id:
-    #         test_product = Product.objects.get(slug=i.slug)
-    #         if created:
-    #             test_product.brand_id = brand.id
-    #     if not i.brand_id:
-    #         try:
-    #             brad = Brand.objects.get(name=br)
-    #             prod = Product.objects.get(name=i.name)
-    #             prod.brand_id = brad
-    #             prod.save()
-    #             print("Successed")
-    #         except:
-    #             print("Not Found this instance")
-#     user_cookie = request.COOKIES.get('csrftoken','')
-#     user_session_id = request.COOKIES.get('sessionid','')
-#     user_os = request.META['OS']
-#     user_name = request.META['USERNAME']
-#     user_computer_name = request.META['COMPUTERNAME']
-#     user_core = request.META['NUMBER_OF_PROCESSORS']
-#     user_name = request.META['USERNAME']
-
-#     user_agent = request.META.get('HTTP_USER_AGENT', '')
-#     ip_address = request.META.get('REMOTE_ADDR', '')
-#     referrer = request.META.get('HTTP_REFERER', '')
-#     accepted_languages = request.META.get('HTTP_ACCEPT_LANGUAGE', '')
-
-#     print(f"1- {user_agent}")
-#     print(f"2- {ip_address}")
-#     print(f"3- {referrer}")
-#     print(f"4- {accepted_languages}")
-
-# # Analyze or log the collected information
-
-
-#     print(user_cookie)
-#     print(user_session_id)
-#     print(user_os)
-#     print(user_name)
-#     print(user_computer_name)
-    # print(user_name)
-    # print(user_core)
-    # print(request.META)
+            print(f"TSSSSSSSSSSSSSS {product_photo}")
+            img_data = requests.get(f"{product_photo}").content
+            with open(f"B:\\BOOK\Graduation Project\\New folder (2)\media\image\product\\another\\phone{k}.jpg", 'wb') as handler:
+                handler.write(img_data)
+                k+=1
+            prod = Product.objects.create(
+                name= product_title,
+                description= details,
+                # image = 'https://dream2000.com/media/catalog/product/cache/f0c876fc5fd423dc009b2416a0e65966/s/a/samsung-a53-5g-_8_128_-awesome-black-1.jpg',
+                image = f'image\product\\another\\phone{k}.jpg',
+                category_id =  cat, 
+                price = float_value,
+                quantity_in_stock = 100,
+                # brand_id = br,
+                slug = slugify(product_title)
+            )
+        print("main####################")
+        k = 1
+        for i in products:
+            print("test 1")
+            print(i)
+            try:
+                get_product_info(i, k)
+            except:
+                continue
+            k +=1
     # main(page)
-    # return render(request, 'temp.html')
-    # product = Product.objects.all()
+    product = Product.objects.filter(category_id_id=162)
+    print(product)
+    for i in product:
+        
+        br = i.name.split(' ')[0]
+        print(br)
+        brand, created = Brand.objects.get_or_create(name=br)
+        if not i.brand_id:
+            test_product = Product.objects.get(slug=i.slug)
+            if created:
+                test_product.brand_id = brand.id
+        if not i.brand_id:
+            try:
+                brad = Brand.objects.get(name=br)
+                prod = Product.objects.get(name=i.name)
+                prod.brand_id = brad
+                prod.save()
+                print("Successed")
+            except:
+                print("Not Found this instance")
+    user_cookie = request.COOKIES.get('csrftoken','')
+    user_session_id = request.COOKIES.get('sessionid','')
+    user_os = request.META['OS']
+    user_name = request.META['USERNAME']
+    user_computer_name = request.META['COMPUTERNAME']
+    user_core = request.META['NUMBER_OF_PROCESSORS']
+    user_name = request.META['USERNAME']
+
+    user_agent = request.META.get('HTTP_USER_AGENT', '')
+    ip_address = request.META.get('REMOTE_ADDR', '')
+    referrer = request.META.get('HTTP_REFERER', '')
+    accepted_languages = request.META.get('HTTP_ACCEPT_LANGUAGE', '')
+
+    print(f"1- {user_agent}")
+    print(f"2- {ip_address}")
+    print(f"3- {referrer}")
+    print(f"4- {accepted_languages}")
+
+# Analyze or log the collected information
+
+
+    print(user_cookie)
+    print(user_session_id)
+    print(user_os)
+    print(user_name)
+    print(user_computer_name)
+    print(user_name)
+    print(user_core)
+    print(request.META)
+    main(page)
+    return render(request, 'temp.html')
+    product = Product.objects.all()
 
     return HttpResponse('nothing')
 

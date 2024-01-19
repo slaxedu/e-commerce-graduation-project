@@ -86,7 +86,7 @@ def main(request):
     reviews_stats = Review.objects.values(
         'product_id').annotate(total_ratings=Count('rate'))
     filtered_products = [stats['product_id']
-                         for stats in reviews_stats if stats['total_ratings'] >= 1]
+                         for stats in reviews_stats if stats['total_ratings'] >= 3]
     filtered_reviews = Review.objects.filter(product_id__in=filtered_products)
     mean_ratings = filtered_reviews.values(
         'product_id').annotate(mean_rating=Avg('rate'))
@@ -140,13 +140,13 @@ def main(request):
         recommend_product.append(Product.objects.get(id=i))
     
     trending = ClickCount.objects.all().order_by('-count')
-    
-    if not recommend_product:
-        recommend_product = Product.objects.all().order_by('?')
+    recommend_product2=[]
+    if not recommend_product2:
+        recommend_product2 = Product.objects.all().order_by('?')
     context={
     "trending": trending[0:10],
     "recommend": recommend_product[0:10],
-    "recommend2": recommend_product[10:20],
+    "recommend2": recommend_product2[0:10],
     'recently_product': recently_product_real[0:10],
     "number_product": number,
     "categories":categories,
@@ -156,7 +156,6 @@ def main(request):
     return render(request, 'home/main.html', context)
 
 def not_found(request, exception):
-
     return render(request, 'home/notfound.html',{}, status=404)
 
 
